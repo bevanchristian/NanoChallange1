@@ -6,10 +6,11 @@
 //
 
 import Foundation
+import UIKit
 
 struct elearnModel{
     var nama = ""
-    var photo = ""
+    var photo:UIImage? = nil
     var expertise = ""
     var team = ""
     var shift = ""

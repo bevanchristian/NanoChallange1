@@ -22,7 +22,8 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         title = "Learning Explorer"
         collectionView.delegate = self
         collectionView.dataSource = self
-        elearn.GetData(myview: self)
+        performSelector(inBackground: #selector(manggilData), with: nil)
+
         NotificationCenter.default.addObserver(forName: NSNotification.Name("API"), object: nil, queue: OperationQueue.main) { [self] (notification) in
             let elearnVC = notification.object as?  elearnData
            dataFix = elearn.dataFix
@@ -31,6 +32,10 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
             print("a")
         }
 
+    }
+    
+    @objc func manggilData(){
+        elearn.GetData(myview: self)
     }
     
     
@@ -43,6 +48,14 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? HomeCollectionViewCell
         cell?.Skill.text = dataFix[indexPath.row].nama
+        cell?.foto.image = dataFix[indexPath.row].photo
+        cell?.foto.layer.borderWidth = 1
+        cell?.foto.layer.masksToBounds = false
+        //cell?.foto.layer.borderColor = UIColor.black.cgColor
+        cell?.foto.layer.cornerRadius = (cell?.foto.frame.height)!/2
+        cell?.foto.clipsToBounds = true
+        
+      
         
         
         

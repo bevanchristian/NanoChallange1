@@ -7,6 +7,7 @@
 
 import Foundation
 import CloudKit
+import UIKit
 class elearnData{
     let nama = ""
     let photo = ""
@@ -47,10 +48,19 @@ class elearnData{
                 teamArray = records!.compactMap({$0.value(forKey:"team") as? String})
                 
                 
-                for x in 0...nameArray.count-1 {
+                for x in 0...nameArray.count-1{
                     var model = elearnModel()
                     model.nama = nameArray[x]
-                    model.photo = photoArray[x]
+                    print(photoArray[x])
+                    if photoArray[x] != nil{
+                        if let datafoto = try? Data(contentsOf: (URL(string: photoArray[x]) ?? URL(string: "https://dl.airtable.com/.attachments/793d85215a4c8118e5c815854d5b3725/0ceb3359/FelindaGracia.jpg"))! ) {
+                            if let foto = UIImage(data: datafoto) {
+                                model.photo = foto
+                            }
+                        }
+                    }
+                 
+                  
                     model.expertise = expertiseArray[x]
                     model.team = teamArray[x]
                     model.shift = shiftArray[x]
@@ -58,9 +68,9 @@ class elearnData{
                     model.point = pointArray[x]
                     model.skill = skillArray[x]
                     dataFix.append(model)
-               
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "API"), object: self)
                 }
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "API"), object: self)
+               
             
         }else{
             // jika cloud ga ada manggil api dan dia nanti nyimpen kedalam cloud
@@ -91,7 +101,14 @@ class elearnData{
             for x in 0...jsonDecoder.count-1{
                 var model = elearnModel()
                 model.nama = jsonDecoder[x].Name
-                model.photo = jsonDecoder[x].Photo
+                
+                if photoArray[x] != nil{
+                    if let datafoto = try? Data(contentsOf: (URL(string: jsonDecoder[x].Photo) ?? URL(string: "https://dl.airtable.com/.attachments/793d85215a4c8118e5c815854d5b3725/0ceb3359/FelindaGracia.jpg"))! ) {
+                        if let foto = UIImage(data: datafoto) {
+                            model.photo = foto
+                        }
+                    }
+                }
                 model.expertise = jsonDecoder[x].Expertise
                 model.team = jsonDecoder[x].Team
                 model.shift = jsonDecoder[x].Shift
@@ -104,16 +121,16 @@ class elearnData{
                 
                 
                 // nyimpen ke cloud
-                saveProfil(name: model.nama, foto: model.photo, belajar: model.belajar, point: model.point, skill: model.skill, expertise: model.expertise, shift: model.shift, team: model.team)
-    
+                saveProfil(name: model.nama, foto: model.photo!, belajar: model.belajar, point: model.point, skill: model.skill, expertise: model.expertise, shift: model.shift, team: model.team)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "API"), object: self)
             }
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "API"), object: self)
+           
             
         }
         
     }
     
-    func saveProfil(name:String,foto:String,belajar:String,point:String,skill:String,expertise:String,shift:String,team:String){
+    func saveProfil(name:String,foto:UIImage,belajar:String,point:String,skill:String,expertise:String,shift:String,team:String){
         let record = CKRecord(recordType: "User")
         record.setValue(name, forKey: "nama")
         record.setValue(foto, forKey: "foto")
