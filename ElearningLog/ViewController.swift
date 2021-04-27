@@ -38,6 +38,11 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         elearn.GetData(myview: self)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = storyboard?.instantiateViewController(identifier: "detail")
+        
+        navigationController?.pushViewController(cell!, animated: true)
+    }
     
     
     
