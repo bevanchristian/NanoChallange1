@@ -24,20 +24,34 @@ class elearnData{
     var shiftArray = [String]()
     var teamArray = [String]()
     
+    
+    
+    var nameArrayDesign = [String]()
+    var photoArrayDesign = [String]()
+    var mau_belajarArrayDesign = [String]()
+    var pointArrayDesign = [String]()
+    var skillArrayDesign = [String]()
+    var expertiseArrayDesign = [String]()
+    var shiftArrayDesign = [String]()
+    var teamArrayDesign = [String]()
+    
     var dataFix = [elearnModel]()
+    var dataFixDesign = [elearnModel]()
     
     let database = CKContainer(identifier: "iCloud.ElearningLog").publicCloudDatabase
     
     
     
     func GetData(myview:ViewController){
-        
-        let query = CKQuery(recordType: "User", predicate: NSPredicate(value: true))
+        // it
+        let predicate = NSPredicate(format: "expertise == %@", "Tech / IT / IS")
+        let query = CKQuery(recordType: "User", predicate: predicate)
         database.perform(query, inZoneWith: nil) { [self] (records, error) in
             // jika record nya nill maka manggil dari api
             if records != nil {
-        
+        print("asi")
             // diterima dari cloudkit masih dalam bentuk array
+                print(records)
                 nameArray = records!.compactMap({$0.value(forKey:"nama") as? String})
                 photoArray = records!.compactMap({ $0.value(forKey: "foto") as? String})
                 mau_belajarArray = records!.compactMap({$0.value(forKey:"mau_belajar") as? String})
@@ -48,6 +62,8 @@ class elearnData{
                 teamArray = records!.compactMap({$0.value(forKey:"team") as? String})
                 
                 
+                if nameArray.count > 0{
+
                 for x in 0...nameArray.count-1{
                     var model = elearnModel()
                     model.nama = nameArray[x]
@@ -59,8 +75,6 @@ class elearnData{
                             }
                         }
                     }
-                 
-                  
                     model.expertise = expertiseArray[x]
                     model.team = teamArray[x]
                     model.shift = shiftArray[x]
@@ -70,6 +84,10 @@ class elearnData{
                     dataFix.append(model)
                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: "API"), object: self)
                 }
+                }else{
+                    print("kosong")
+                }
+
                
             
         }else{
@@ -89,10 +107,98 @@ class elearnData{
         
         
     }
-    
-  
+        
+        
+    // design ===================================================== area design dibawah ini ========= untuk home
+        
+        
+        
+        
+        let predicateDesign = NSPredicate(format: "expertise == %@", "Design")
+        let queryDesign = CKQuery(recordType: "User", predicate: predicateDesign)
+        database.perform(queryDesign, inZoneWith: nil) { [self] (records, error) in
+            // jika record nya nill maka manggil dari api
+            if records != nil {
+        print("asi")
+            // diterima dari cloudkit masih dalam bentuk array
        
+                print(records)
+                nameArrayDesign = records!.compactMap({$0.value(forKey:"nama") as? String})
+                photoArrayDesign = records!.compactMap({ $0.value(forKey: "foto") as? String})
+                mau_belajarArrayDesign = records!.compactMap({$0.value(forKey:"mau_belajar") as? String})
+                pointArrayDesign = records!.compactMap({ $0.value(forKey: "point") as? String})
+                skillArrayDesign = records!.compactMap({ $0.value(forKey: "skill") as? String})
+                expertiseArrayDesign = records!.compactMap({$0.value(forKey:"expertise") as? String})
+                shiftArrayDesign = records!.compactMap({ $0.value(forKey: "shift") as? String})
+                teamArrayDesign = records!.compactMap({$0.value(forKey:"team") as? String})
+                
+                
+                if nameArray.count > 0{
 
+                for x in 0...nameArrayDesign.count-1{
+                    var model = elearnModel()
+                    model.nama = nameArrayDesign[x]
+       
+                    if photoArrayDesign[x] != nil{
+                        if let datafoto = try? Data(contentsOf: (URL(string: photoArrayDesign[x]) ?? URL(string: "https://dl.airtable.com/.attachments/793d85215a4c8118e5c815854d5b3725/0ceb3359/FelindaGracia.jpg"))! ) {
+                            if let foto = UIImage(data: datafoto) {
+                                model.photo = foto
+                            }
+                        }
+                    }
+                    model.expertise = expertiseArrayDesign[x]
+                    model.team = teamArrayDesign[x]
+                    model.shift = shiftArrayDesign[x]
+                    model.belajar = mau_belajarArrayDesign[x]
+                    model.point = pointArrayDesign[x]
+                    model.skill = skillArrayDesign[x]
+                    dataFixDesign.append(model)
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "API"), object: self)
+                }
+                }else{
+                    print("kosong")
+                }
+
+               
+            
+        }else{
+            // jika cloud ga ada manggil api dan dia nanti nyimpen kedalam cloud
+            let urlString = "https://nc2.theideacompass.com/explorers-api.json"
+            if let url = try? URL(string: urlString){
+                URLSession.shared.dataTask(with: url) { [self] data, response, error in
+                  if let data = data {
+                    parse(data)
+                    // function closure
+                  }
+               }.resume()
+                
+            }
+            
+        }
+        
+        
+    }
+        
+    
+
+    
+  }// ahkir dari get data
+    
+    func removeArray(){
+        nameArray.removeAll()
+        photoArray.removeAll()
+        mau_belajarArray.removeAll()
+        pointArray.removeAll()
+        skillArray.removeAll()
+        expertiseArray.removeAll()
+        shiftArray.removeAll()
+        teamArray.removeAll()
+        
+    }
+    
+    
+    
+    
     
     func parse(_ json:Data){
         let decoder = JSONDecoder()
@@ -130,6 +236,10 @@ class elearnData{
         
     }
     
+    
+    
+    
+    
     func saveProfil(name:String,foto:UIImage,belajar:String,point:String,skill:String,expertise:String,shift:String,team:String){
         let record = CKRecord(recordType: "User")
         record.setValue(name, forKey: "nama")
@@ -151,16 +261,4 @@ class elearnData{
             }
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-}
 }
