@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "D3A8FD67-AEFA-43FB-8284-83C2054B1656"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EAA42ABB-3B3D-4B8F-B07B-7BEB1B129056"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ElearningLog/ElearningData.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "310"
+            endingLineNumber = "310"
+            landmarkName = "GetData(myview:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "EAA42ABB-3B3D-4B8F-B07B-7BEB1B129056 - 383a638334180858"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ElearningLog.elearnData.GetData(myview: ElearningLog.ViewController) -&gt; ()"
+                  moduleName = "ElearningLog"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bevanchristian/Desktop/ElearningLog/NanoChallange1/ElearningLog/ElearningData.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "99"
+                  endingLineNumber = "99"
+                  offsetFromSymbolStart = "749">
+               </Location>
+               <Location
+                  uuid = "EAA42ABB-3B3D-4B8F-B07B-7BEB1B129056 - 383a638334180858"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ElearningLog.elearnData.GetData(myview: ElearningLog.ViewController) -&gt; ()"
+                  moduleName = "ElearningLog"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bevanchristian/Desktop/ElearningLog/NanoChallange1/ElearningLog/ElearningData.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "99"
+                  endingLineNumber = "99"
+                  offsetFromSymbolStart = "780">
+               </Location>
+               <Location
+                  uuid = "EAA42ABB-3B3D-4B8F-B07B-7BEB1B129056 - 2ae23b46c2276c18"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.CKRecord) -&gt; () in ElearningLog.elearnData.GetData(myview: ElearningLog.ViewController) -&gt; ()"
+                  moduleName = "ElearningLog"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bevanchristian/Desktop/ElearningLog/NanoChallange1/ElearningLog/ElearningData.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "100"
+                  endingLineNumber = "100"
+                  offsetFromSymbolStart = "107">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4EFB6346-8ECE-447E-BB1E-9E092E3C831C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ElearningLog/ElearningData.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "298"
+            endingLineNumber = "298"
+            landmarkName = "GetData(myview:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4DFA2E2A-10D3-4810-A076-F24C2F5B588C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ElearningLog/ElearningData.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "299"
+            endingLineNumber = "299"
+            landmarkName = "GetData(myview:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

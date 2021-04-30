@@ -7,8 +7,9 @@
 
 import Foundation
 import UIKit
-
+import CloudKit
 struct elearnModel{
+    var id : CKRecord.ID!
     var nama = ""
     var photo:UIImage? = nil
     var expertise = ""
