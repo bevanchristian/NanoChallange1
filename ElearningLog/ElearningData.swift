@@ -52,6 +52,7 @@ class elearnData{
     var dataFix = [elearnModel]()
     var dataFixDesign = [elearnModel]()
     var dataFixPro = [elearnModel]()
+    var detail = [detailModel]()
     var recordIdit = [CKRecord.ID]()
     var recordIdDesign = [CKRecord.ID]()
     var recordIdPro = [CKRecord.ID]()
@@ -95,6 +96,7 @@ class elearnData{
         
         // ini dapetin record idnya
         let operation = CKQueryOperation(query: query)
+        operation.qualityOfService = .userInteractive
         operation.recordFetchedBlock = { [self] (record) in
             print("query anyar")
             print("it")
@@ -183,6 +185,7 @@ class elearnData{
         
         // ini dapetin record idnya
         let operationdesign = CKQueryOperation(query: queryDesign)
+        operationdesign.qualityOfService = .userInteractive
         operationdesign.recordFetchedBlock = { [self] (record) in
             print("query anyar")
             
@@ -241,6 +244,7 @@ class elearnData{
         
         // ini dapetin record idnya
         let operationpro = CKQueryOperation(query: queryPro)
+        operationpro.qualityOfService = .userInteractive
         operationpro.recordFetchedBlock = { [self] (record) in
             print("query anyar")
             
@@ -599,7 +603,70 @@ class elearnData{
   }// ahkir dari get data
     
    
+    func getDetail(nama:String){
+        
+        let predicateDetail = NSPredicate(format: "nama == %@", "\(nama)")
+        let queryDetail = CKQuery(recordType: "Belajar", predicate: predicateDetail)
+        
+        // ini dapetin record idnya
+        let operationDetail = CKQueryOperation(query: queryDetail)
+        operationDetail.qualityOfService = .userInteractive
+        operationDetail.recordFetchedBlock = { [self] (record) in
+            
+            
+            
+            var modelDetail = detailModel()
+        
+            modelDetail.nama = (record["nama"] as? String)!
+            modelDetail.nama_belajar = (record["nama_belajar"] as? String)!
+            modelDetail.Foto = (record["Foto"] as? CKAsset)!
+            modelDetail.deskripsi = (record["deskripsi"] as? String)!
+            modelDetail.url = (record["url"] as? String)!
+            detail.append(modelDetail)
+            
+          
+        }
+        
+        operationDetail.queryCompletionBlock = { cursor ,error in
+            NotificationCenter.default.post(name: NSNotification.Name("detail"), object: self)
+ 
+        }
+        
+        database.add(operationDetail)
+    }
     
+    
+    func getReview(nama:String){
+        
+        let predicateDetail = NSPredicate(format: "nama == %@", "\(nama)")
+        let queryDetail = CKQuery(recordType: "Belajar", predicate: predicateDetail)
+        
+        // ini dapetin record idnya
+        let operationDetail = CKQueryOperation(query: queryDetail)
+        operationDetail.qualityOfService = .userInteractive
+        operationDetail.recordFetchedBlock = { [self] (record) in
+            
+            
+            
+            var modelDetail = detailModel()
+        
+            modelDetail.nama = (record["nama"] as? String)!
+            modelDetail.nama_belajar = (record["nama_belajar"] as? String)!
+            modelDetail.Foto = (record["Foto"] as? CKAsset)!
+            modelDetail.deskripsi = (record["deskripsi"] as? String)!
+            modelDetail.url = (record["url"] as? String)!
+            detail.append(modelDetail)
+            
+          
+        }
+        
+        operationDetail.queryCompletionBlock = { cursor ,error in
+            NotificationCenter.default.post(name: NSNotification.Name("detail"), object: self)
+ 
+        }
+        
+        database.add(operationDetail)
+    }
     
     
     

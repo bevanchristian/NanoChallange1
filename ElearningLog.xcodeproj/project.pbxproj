@@ -21,6 +21,9 @@
 		503A5A2426383CDD00064EC8 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503A5A2326383CDD00064EC8 /* DetailViewController.swift */; };
 		503A5A2726393FCB00064EC8 /* HomeDesignCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503A5A2626393FCB00064EC8 /* HomeDesignCollectionViewCell.swift */; };
 		503A5A2A26395C0600064EC8 /* HomeProfesionalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503A5A2926395C0600064EC8 /* HomeProfesionalCollectionViewCell.swift */; };
+		503A5A2D263D50C100064EC8 /* DetailWhatLearnCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503A5A2C263D50C000064EC8 /* DetailWhatLearnCollectionViewCell.swift */; };
+		503A5A30263D551200064EC8 /* DetailReviewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503A5A2F263D551200064EC8 /* DetailReviewCollectionViewCell.swift */; };
+		503A5A33263D5AB500064EC8 /* detailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503A5A32263D5AB500064EC8 /* detailModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +44,9 @@
 		503A5A2326383CDD00064EC8 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		503A5A2626393FCB00064EC8 /* HomeDesignCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDesignCollectionViewCell.swift; sourceTree = "<group>"; };
 		503A5A2926395C0600064EC8 /* HomeProfesionalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeProfesionalCollectionViewCell.swift; sourceTree = "<group>"; };
+		503A5A2C263D50C000064EC8 /* DetailWhatLearnCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWhatLearnCollectionViewCell.swift; sourceTree = "<group>"; };
+		503A5A2F263D551200064EC8 /* DetailReviewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailReviewCollectionViewCell.swift; sourceTree = "<group>"; };
+		503A5A32263D5AB500064EC8 /* detailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = detailModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +96,9 @@
 				503A5A2326383CDD00064EC8 /* DetailViewController.swift */,
 				503A5A2626393FCB00064EC8 /* HomeDesignCollectionViewCell.swift */,
 				503A5A2926395C0600064EC8 /* HomeProfesionalCollectionViewCell.swift */,
+				503A5A2C263D50C000064EC8 /* DetailWhatLearnCollectionViewCell.swift */,
+				503A5A2F263D551200064EC8 /* DetailReviewCollectionViewCell.swift */,
+				503A5A32263D5AB500064EC8 /* detailModel.swift */,
 			);
 			path = ElearningLog;
 			sourceTree = "<group>";
@@ -179,8 +188,11 @@
 				503A59FA2637CFFD00064EC8 /* AppDelegate.swift in Sources */,
 				503A59FC2637CFFD00064EC8 /* SceneDelegate.swift in Sources */,
 				503A5A122637F02B00064EC8 /* ElearningData.swift in Sources */,
+				503A5A30263D551200064EC8 /* DetailReviewCollectionViewCell.swift in Sources */,
+				503A5A33263D5AB500064EC8 /* detailModel.swift in Sources */,
 				503A5A2726393FCB00064EC8 /* HomeDesignCollectionViewCell.swift in Sources */,
 				503A5A0F2637D02100064EC8 /* data.swift in Sources */,
+				503A5A2D263D50C100064EC8 /* DetailWhatLearnCollectionViewCell.swift in Sources */,
 				503A5A2426383CDD00064EC8 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
