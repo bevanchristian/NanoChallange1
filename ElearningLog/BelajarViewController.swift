@@ -8,6 +8,11 @@
 import UIKit
 import CloudKit
 
+protocol sendPoint {
+    func send(point:String)
+}
+
+
 class BelajarViewController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate{
 
     
@@ -19,9 +24,12 @@ class BelajarViewController: UIViewController,UIImagePickerControllerDelegate, U
     var id:CKRecord.ID!
     var nama:String!
     var imageUpload:CKAsset!
+    var skor:String!
     @IBOutlet var image: UIButton!
+    var delegate:sendPoint!
     override func viewDidLoad() {
         super.viewDidLoad()
+     
         image.setTitle("Upload A Photo", for: .normal)
 
 
@@ -32,6 +40,14 @@ class BelajarViewController: UIViewController,UIImagePickerControllerDelegate, U
 
     //add button
     @IBAction func add(_ sender: UIButton) {
+   
+        if var skorSementara = try? Int(skor){
+            skorSementara += 100
+            delegate.send(point: String(skorSementara))
+            saveProfilPoint(point: String(skorSementara))
+        }
+        
+        
         saveProfil(nama:nama,judul: judul.text!, deskripsi: deskripsi.text, url: url.text!, foto: imageUpload)
         dismiss(animated: true)
     }
@@ -107,6 +123,51 @@ class BelajarViewController: UIViewController,UIImagePickerControllerDelegate, U
             }
         }
     }
+    
+    
+    func saveProfilPoint(point:String){
+        DispatchQueue.main.async { [self] in
+          
+               
+        let recordID = id
+        database.fetch(withRecordID: recordID!) { [self] (record, error) in
+                   
+                   if error == nil {
+                   
+                       
+                    record?.setValue(point, forKey: "point")
+              
+                       
+                       self.database.save(record!, completionHandler: { (newRecord, error) in
+                           
+                           if error == nil {
+                               //gabisa savee
+                               print("Record Saved")
+                               
+                           } else {
+                               
+                               print("Record Not Saved")
+                               
+                           }
+                           
+                       })
+                       
+                   } else {
+                       // ga ketemu record id
+                       print("Could not fetch record")
+                       
+                   }
+                   
+               }
+            
+        }
+        
+       
+        
+       
+        
+    }
+    
     
 
 }

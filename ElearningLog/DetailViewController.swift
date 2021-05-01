@@ -11,7 +11,15 @@ import CloudKit
 protocol kirimNotif {
     func send()
 }
-class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource{
+class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource, sendPoint{
+    
+    // ngisi point
+    func send(point: String) {
+        home.dataFixDesign[urutan.item].point = point
+        self.point.text = point
+        //performSelector(inBackground: #selector(manggilData), with: nil)
+    }
+    
  
     
     var namaUser:String = ""
@@ -153,6 +161,8 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDele
         pindah.modalTransitionStyle = .coverVertical
         pindah.id = id
         pindah.nama = nama.text
+        pindah.skor = point.text
+        pindah.delegate = self
         navigationController?.present(pindah, animated: true)
     }
     
