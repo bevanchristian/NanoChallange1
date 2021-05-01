@@ -24,6 +24,8 @@
 		503A5A2D263D50C100064EC8 /* DetailWhatLearnCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503A5A2C263D50C000064EC8 /* DetailWhatLearnCollectionViewCell.swift */; };
 		503A5A30263D551200064EC8 /* DetailReviewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503A5A2F263D551200064EC8 /* DetailReviewCollectionViewCell.swift */; };
 		503A5A33263D5AB500064EC8 /* detailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503A5A32263D5AB500064EC8 /* detailModel.swift */; };
+		503A5A3A263D653E00064EC8 /* reviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503A5A39263D653E00064EC8 /* reviewModel.swift */; };
+		503A5A3D263D68ED00064EC8 /* BelajarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503A5A3C263D68ED00064EC8 /* BelajarViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +49,8 @@
 		503A5A2C263D50C000064EC8 /* DetailWhatLearnCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWhatLearnCollectionViewCell.swift; sourceTree = "<group>"; };
 		503A5A2F263D551200064EC8 /* DetailReviewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailReviewCollectionViewCell.swift; sourceTree = "<group>"; };
 		503A5A32263D5AB500064EC8 /* detailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = detailModel.swift; sourceTree = "<group>"; };
+		503A5A39263D653E00064EC8 /* reviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reviewModel.swift; sourceTree = "<group>"; };
+		503A5A3C263D68ED00064EC8 /* BelajarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BelajarViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +103,8 @@
 				503A5A2C263D50C000064EC8 /* DetailWhatLearnCollectionViewCell.swift */,
 				503A5A2F263D551200064EC8 /* DetailReviewCollectionViewCell.swift */,
 				503A5A32263D5AB500064EC8 /* detailModel.swift */,
+				503A5A39263D653E00064EC8 /* reviewModel.swift */,
+				503A5A3C263D68ED00064EC8 /* BelajarViewController.swift */,
 			);
 			path = ElearningLog;
 			sourceTree = "<group>";
@@ -182,11 +188,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				503A5A2A26395C0600064EC8 /* HomeProfesionalCollectionViewCell.swift in Sources */,
+				503A5A3A263D653E00064EC8 /* reviewModel.swift in Sources */,
 				503A5A202638211900064EC8 /* HomeCollectionViewCell.swift in Sources */,
 				503A5A152637F2EF00064EC8 /* elearnModel.swift in Sources */,
 				503A59FE2637CFFD00064EC8 /* ViewController.swift in Sources */,
 				503A59FA2637CFFD00064EC8 /* AppDelegate.swift in Sources */,
 				503A59FC2637CFFD00064EC8 /* SceneDelegate.swift in Sources */,
+				503A5A3D263D68ED00064EC8 /* BelajarViewController.swift in Sources */,
 				503A5A122637F02B00064EC8 /* ElearningData.swift in Sources */,
 				503A5A30263D551200064EC8 /* DetailReviewCollectionViewCell.swift in Sources */,
 				503A5A33263D5AB500064EC8 /* detailModel.swift in Sources */,

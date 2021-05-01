@@ -49,10 +49,14 @@ class elearnData{
     var teamArrayPro = [String]()
     
     
+    // array penyimpan model
     var dataFix = [elearnModel]()
     var dataFixDesign = [elearnModel]()
     var dataFixPro = [elearnModel]()
     var detail = [detailModel]()
+    var review = [reviewModel]()
+    
+    
     var recordIdit = [CKRecord.ID]()
     var recordIdDesign = [CKRecord.ID]()
     var recordIdPro = [CKRecord.ID]()
@@ -638,34 +642,33 @@ class elearnData{
     
     func getReview(nama:String){
         
-        let predicateDetail = NSPredicate(format: "nama == %@", "\(nama)")
-        let queryDetail = CKQuery(recordType: "Belajar", predicate: predicateDetail)
+        let predicateReview = NSPredicate(format: "nama == %@", "\(nama)")
+        let queryReview = CKQuery(recordType: "review", predicate: predicateReview)
         
         // ini dapetin record idnya
-        let operationDetail = CKQueryOperation(query: queryDetail)
-        operationDetail.qualityOfService = .userInteractive
-        operationDetail.recordFetchedBlock = { [self] (record) in
+        let operationReview = CKQueryOperation(query: queryReview)
+        operationReview.qualityOfService = .userInteractive
+        operationReview.recordFetchedBlock = { [self] (record) in
             
             
             
-            var modelDetail = detailModel()
+            var modelReview = reviewModel()
         
-            modelDetail.nama = (record["nama"] as? String)!
-            modelDetail.nama_belajar = (record["nama_belajar"] as? String)!
-            modelDetail.Foto = (record["Foto"] as? CKAsset)!
-            modelDetail.deskripsi = (record["deskripsi"] as? String)!
-            modelDetail.url = (record["url"] as? String)!
-            detail.append(modelDetail)
+            modelReview.nama = (record["nama"] as? String)!
+            modelReview.nama_review = (record["nama_review"] as? String)!
+            modelReview.review = (record["review"] as? String)!
+          
+            review.append(modelReview)
             
           
         }
         
-        operationDetail.queryCompletionBlock = { cursor ,error in
+        operationReview.queryCompletionBlock = { cursor ,error in
             NotificationCenter.default.post(name: NSNotification.Name("detail"), object: self)
  
         }
         
-        database.add(operationDetail)
+        database.add(operationReview)
     }
     
     

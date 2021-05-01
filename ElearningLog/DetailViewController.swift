@@ -26,7 +26,9 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDele
     var id:CKRecord.ID!
     let elearn = elearnData()
     var detail = [detailModel]()
-    var cekIsi = false
+    var review = [reviewModel]()
+    var cekIsiBelajar = false
+    var cekIsiReview = false
     @IBOutlet var ReviewCollectionView: UICollectionView!
     @IBOutlet var LearnCollectionView: UICollectionView!
     @IBOutlet var buttonSend: UIButton!
@@ -50,8 +52,11 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDele
 
         NotificationCenter.default.addObserver(forName: NSNotification.Name("detail"), object: nil, queue: OperationQueue.main) { [self] (notif) in
             let elearnVC = notif.object as?  elearnData
+            print("masuk notif detail")
             detail = elearnVC!.detail
+            review = elearnVC!.review
             self.LearnCollectionView.reloadData()
+            self.ReviewCollectionView.reloadData()
          
         }
         performSelector(inBackground: #selector(manggilData), with: nil)
@@ -75,22 +80,30 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDele
     
     @objc func  manggilData(){
         elearn.getDetail(nama: namaUser)
+        elearn.getReview(nama: namaUser)
         
     }
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == LearnCollectionView{
-            if detail.count > 0{
-                cekIsi = true
+            if detail.count > 0 {
+                cekIsiBelajar = true
                 return detail.count
     
             }else{
+                
                 return 1
             }
           
         }else{
-            return 5
+            if review.count > 0{
+                cekIsiReview = true
+                return review.count
+            }else{
+                return 1
+            }
+         
         }
       
     }
@@ -98,7 +111,7 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDele
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == LearnCollectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "learncell", for: indexPath) as! DetailWhatLearnCollectionViewCell
-            if cekIsi{
+            if cekIsiBelajar{
                 cell.label.text = detail[indexPath.row].nama_belajar
                // cell.foto.image = detail[indexPath.row].Foto
                 let data = try? Data(contentsOf: (detail[indexPath.row].Foto?.fileURL)!)
@@ -107,13 +120,17 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDele
             }else{
                 cell.label.text = "User belum belajar"
             }
-      
-    
-            
             return cell
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "reviewcell", for: indexPath) as! DetailReviewCollectionViewCell
-            
+            if cekIsiReview{
+                cell.nama.text = review[indexPath.row].nama_review
+                cell.reviewText.text = review[indexPath.row].review
+                
+            }else{
+                cell.nama.text = "Uknown"
+                cell.reviewText.text = "No review yet"
+            }
             return cell
         }
         
@@ -124,15 +141,6 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDele
     
     
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange,
-                           replacementString string: String) -> Bool
-    {
-        let maxLength = 4
-        let currentString: NSString = textField.text as! NSString
-        let newString: NSString =
-            currentString.replacingCharacters(in: range, with: string) as NSString
-        return newString.length <= maxLength
-    }
 
     
 
@@ -140,17 +148,23 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDele
     @IBAction func what_i_HaveLearn(_ sender: UIButton) {
         
         print("pindah")
-        let pindah = storyboard?.instantiateViewController(identifier: "learndetail")
+        let pindah = (storyboard?.instantiateViewController(identifier: "learndetail"))! as BelajarViewController
+        pindah.modalPresentationStyle = .pageSheet
+        pindah.modalTransitionStyle = .coverVertical
+        pindah.id = id
+        pindah.nama = nama.text
+        navigationController?.present(pindah, animated: true)
+    }
+    
+    @IBAction func reviewButton(_ sender: UIButton) {
+        let pindah = storyboard?.instantiateViewController(identifier: "review")
         pindah?.modalPresentationStyle = .pageSheet
         pindah?.modalTransitionStyle = .coverVertical
 
         navigationController?.present(pindah!, animated: true)
     }
-    @IBAction func buttonSendOutlet(_ sender: Any) {
-        print("tex")
-        //simpanObjek()
-        //delegate2.send()
-    }
+    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         simpanObjek()
@@ -160,13 +174,7 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDele
     }
     
    
-    @IBAction func reviewButton(_ sender: UIButton) {
-        let pindah = storyboard?.instantiateViewController(identifier: "review")
-        pindah?.modalPresentationStyle = .pageSheet
-        pindah?.modalTransitionStyle = .coverVertical
-
-        navigationController?.present(pindah!, animated: true)
-    }
+   
     
    
 //SAVE KE CLOUDKIT
