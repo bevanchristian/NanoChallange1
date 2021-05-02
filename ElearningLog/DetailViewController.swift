@@ -13,11 +13,11 @@ protocol kirimNotif {
 }
 class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource, sendPoint{
     
-    // ngisi point
+    // ngisi point dari protocol
     func send(point: String) {
         home.dataFixDesign[urutan.item].point = point
         self.point.text = point
-        //performSelector(inBackground: #selector(manggilData), with: nil)
+       //viewDidLoad()
     }
     
  
@@ -57,17 +57,22 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDele
         
         ReviewCollectionView.delegate = self
         ReviewCollectionView.dataSource = self
-
+       
+        DispatchQueue.global(qos: .userInteractive
+        ).async { [self] in
+            manggilData()
+        }
         NotificationCenter.default.addObserver(forName: NSNotification.Name("detail"), object: nil, queue: OperationQueue.main) { [self] (notif) in
             let elearnVC = notif.object as?  elearnData
             print("masuk notif detail")
             detail = elearnVC!.detail
             review = elearnVC!.review
+            print(detail)
             self.LearnCollectionView.reloadData()
             self.ReviewCollectionView.reloadData()
          
         }
-        performSelector(inBackground: #selector(manggilData), with: nil)
+
         
         textskill.delegate = self
         navigationItem.largeTitleDisplayMode = .never
@@ -86,7 +91,8 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDele
     
     
     
-    @objc func  manggilData(){
+     func  manggilData(){
+        print("masuk detail")
         elearn.getDetail(nama: namaUser)
         elearn.getReview(nama: namaUser)
         
@@ -167,18 +173,22 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDele
     }
     
     @IBAction func reviewButton(_ sender: UIButton) {
-        let pindah = storyboard?.instantiateViewController(identifier: "review")
-        pindah?.modalPresentationStyle = .pageSheet
-        pindah?.modalTransitionStyle = .coverVertical
-
-        navigationController?.present(pindah!, animated: true)
+        let pindah = (storyboard?.instantiateViewController(identifier: "review"))! as ReviewViewController
+        pindah.modalPresentationStyle = .pageSheet
+        pindah.modalTransitionStyle = .coverVertical
+        pindah.id = id
+        pindah.namauser = nama.text
+        navigationController?.present(pindah, animated: true)
     }
     
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         simpanObjek()
-        saveProfil()
+        DispatchQueue.global(qos: .userInitiated).async { [self] in
+            saveProfil()
+        }
+     
         //delegate2.send()
       
     }
@@ -189,18 +199,19 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDele
    
 //SAVE KE CLOUDKIT
     func saveProfil(){
-        DispatchQueue.main.async { [self] in
+
           
                
         let recordID = id
         database.fetch(withRecordID: recordID!) { [self] (record, error) in
                    
                    if error == nil {
-                   
+                    DispatchQueue.main.async { [self] in
                        
                     record?.setValue(skill.text, forKey: "skill")
+                   
                     record?.setValue(maubelajarapa.text, forKey: "mau_belajar")
-                       
+                    }
                        self.database.save(record!, completionHandler: { (newRecord, error) in
                            
                            if error == nil {
@@ -223,7 +234,7 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDele
                    
                }
             
-        }
+     
         
        
         

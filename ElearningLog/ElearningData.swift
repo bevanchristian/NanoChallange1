@@ -608,13 +608,14 @@ class elearnData{
     
    
     func getDetail(nama:String){
+      
         
         let predicateDetail = NSPredicate(format: "nama == %@", "\(nama)")
         let queryDetail = CKQuery(recordType: "Belajar", predicate: predicateDetail)
         
         // ini dapetin record idnya
         let operationDetail = CKQueryOperation(query: queryDetail)
-        operationDetail.qualityOfService = .userInteractive
+       // operationDetail.qualityOfService = .userInteractive
         operationDetail.recordFetchedBlock = { [self] (record) in
             
             
@@ -647,7 +648,7 @@ class elearnData{
         
         // ini dapetin record idnya
         let operationReview = CKQueryOperation(query: queryReview)
-        operationReview.qualityOfService = .userInteractive
+        //operationReview.qualityOfService = .userInteractive
         operationReview.recordFetchedBlock = { [self] (record) in
             
             

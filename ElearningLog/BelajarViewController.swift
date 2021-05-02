@@ -125,6 +125,7 @@ class BelajarViewController: UIViewController,UIImagePickerControllerDelegate, U
     }
     
     
+    // update point
     func saveProfilPoint(point:String){
         DispatchQueue.main.async { [self] in
           
