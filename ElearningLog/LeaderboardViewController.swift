@@ -16,6 +16,7 @@ class LeaderboardViewController: UIViewController,UICollectionViewDelegate,UICol
     var dataFix = [elearnModel]()
     var dataFixDesign = [elearnModel]()
     var dataFixPro = [elearnModel]()
+    var kategori = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         leaderboardCollectionView.delegate = self
@@ -37,6 +38,32 @@ class LeaderboardViewController: UIViewController,UICollectionViewDelegate,UICol
 
         // Do any additional setup after loading the view.
     }
+    @IBAction func kategori(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            //it
+         kategori = 0
+            UIView.animate(withDuration: 0.25) {
+                self.leaderboardCollectionView.reloadData()
+            }
+            
+        }
+        else if sender.selectedSegmentIndex == 1{
+            //design
+         kategori = 1
+            UIView.animate(withDuration: 0.25) {
+                self.leaderboardCollectionView.reloadData()
+            }
+            
+        }else{
+            //profesional
+            
+         kategori = 2
+            UIView.animate(withDuration: 0.25) {
+                self.leaderboardCollectionView.reloadData()
+            }
+            
+        }
+    }
     @objc func manggilData(){
         elearn.it(leaderboard: true)
         elearn.design(leaderboard: true)
@@ -44,15 +71,36 @@ class LeaderboardViewController: UIViewController,UICollectionViewDelegate,UICol
     
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataFixPro.count
+        if kategori == 0{
+            return dataFix.count
+        }else if kategori == 1{
+            return dataFixDesign.count
+        }else{
+            return dataFixPro.count
+        }
+ 
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "leaderboardcell", for: indexPath) as! LeaderboardCollectionViewCell
-        cell.nama.text = dataFixPro[indexPath.row].nama
-        cell.point.text = dataFixPro[indexPath.row].point
-        cell.urutan.text = String(indexPath.row)
-        return cell
+        
+        if kategori == 0{
+            cell.nama.text = dataFix[indexPath.row].nama
+            cell.point.text = dataFix[indexPath.row].point
+            cell.urutan.text = String(indexPath.row + 1)
+            return cell
+        }else if kategori == 1{
+            cell.nama.text = dataFixDesign[indexPath.row].nama
+            cell.point.text = dataFixDesign[indexPath.row].point
+            cell.urutan.text = String(indexPath.row + 1)
+            return cell
+        }else{
+            cell.nama.text = dataFixPro[indexPath.row].nama
+            cell.point.text = dataFixPro[indexPath.row].point
+            cell.urutan.text = String(indexPath.row + 1)
+            return cell
+        }
+      
     }
     
 

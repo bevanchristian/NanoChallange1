@@ -151,6 +151,21 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDele
        
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == LearnCollectionView{
+            let pindah = (storyboard?.instantiateViewController(identifier: "detailbelajar"))! as DetailBelajarViewController
+            let data = try? Data(contentsOf: (detail[indexPath.row].Foto?.fileURL)!)
+            let image = UIImage(data: data!)
+            pindah.fotopindah = image
+            pindah.deskrpsipindah = detail[indexPath.row].deskripsi
+            pindah.judupindah = detail[indexPath.row].deskripsi
+            
+            navigationController?.pushViewController(pindah, animated: true)
+        }
+        
+        
+    }
+    
     
     
     

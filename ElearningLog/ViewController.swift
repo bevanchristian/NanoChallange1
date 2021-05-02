@@ -140,6 +140,17 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? HomeCollectionViewCell
             cell?.Skill.text = dataFix[indexPath.row].nama
             cell?.foto.image = dataFix[indexPath.row].photo
+            cell?.skill2.text = dataFix[indexPath.row].skill
+            /*self.layer.shadowColor = [[UIColor blackColor] CGColor];
+            self.layer.shadowRadius = 5;
+            self.layer.shadowOpacity = .25;*/
+
+            cell?.layer.shadowColor = UIColor.gray.cgColor
+            cell?.layer.shadowRadius = 1
+            cell?.layer.shadowOpacity = 0.25
+            cell?.layer.shadowOffset = CGSize(width: 0, height: 3.0)
+            cell?.clipsToBounds = false
+            cell?.layer.masksToBounds = false
             
             if (dataFix[indexPath.row].photo) != nil{
                 if let datafoto = try? Data(contentsOf: (URL(string: (dataFix[indexPath.row].photo as? String)!) ?? URL(string: "https://dl.airtable.com/.attachments/793d85215a4c8118e5c815854d5b3725/0ceb3359/FelindaGracia.jpg"))! ) {
@@ -165,9 +176,16 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "celldesign", for: indexPath) as? HomeDesignCollectionViewCell
             cell?.Skill.text = dataFixDesign[indexPath.row].nama
-            print(dataFixDesign[indexPath.row].nama)
-            print("masuk")
             cell?.foto.image = dataFixDesign[indexPath.row].photo
+            cell?.skill2.text = dataFixDesign[indexPath.row].skill
+            cell?.layer.shadowColor = UIColor.gray.cgColor
+            cell?.layer.shadowRadius = 4
+            cell?.layer.shadowOpacity = 0.25
+            cell?.layer.shadowOffset = CGSize(width: 0, height: 3.0)
+            cell?.clipsToBounds = false
+            cell?.layer.masksToBounds = false
+            
+            
             cell?.foto.layer.borderWidth = 1
             cell?.foto.layer.masksToBounds = false
             //cell?.foto.layer.borderColor = UIColor.black.cgColor
@@ -178,6 +196,15 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellprofesional", for: indexPath) as? HomeProfesionalCollectionViewCell
             cell?.Skill.text = dataFixPro[indexPath.row].nama
             cell?.foto.image = dataFixPro[indexPath.row].photo
+            cell?.skill2.text = dataFixPro[indexPath.row].skill
+            cell?.layer.shadowColor = UIColor.gray.cgColor
+            cell?.layer.shadowRadius = 4
+            cell?.layer.shadowOpacity = 0.25
+            cell?.layer.shadowOffset = CGSize(width: 0, height: 3.0)
+            cell?.clipsToBounds = false
+            cell?.layer.masksToBounds = false
+            
+            
             cell?.foto.layer.borderWidth = 1
             cell?.foto.layer.masksToBounds = false
             //cell?.foto.layer.borderColor = UIColor.black.cgColor

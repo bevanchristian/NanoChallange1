@@ -11,4 +11,6 @@ class HomeCollectionViewCell: UICollectionViewCell {
     @IBOutlet var foto: UIImageView!
     @IBOutlet var Skill: UILabel!
     
+    @IBOutlet var skill2: UILabel!
+    
 }

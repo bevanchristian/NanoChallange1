@@ -100,7 +100,7 @@ class elearnData{
         let query = CKQuery(recordType: "User", predicate: predicate)
         if leaderboard{
             print("leaderboard it")
-            query.sortDescriptors = [NSSortDescriptor(key: "point", ascending: true)]
+            query.sortDescriptors = [NSSortDescriptor(key: "point", ascending: false)]
         }
         // ini dapetin record idnya
         let operation = CKQueryOperation(query: query)
@@ -181,7 +181,7 @@ class elearnData{
         let predicateDesign = NSPredicate(format: "expertise == %@", "Design")
         let queryDesign = CKQuery(recordType: "User", predicate: predicateDesign)
         if leaderboard{
-            queryDesign.sortDescriptors = [NSSortDescriptor(key: "point", ascending: true)]
+            queryDesign.sortDescriptors = [NSSortDescriptor(key: "point", ascending: false)]
         }
         
         // ini dapetin record idnya

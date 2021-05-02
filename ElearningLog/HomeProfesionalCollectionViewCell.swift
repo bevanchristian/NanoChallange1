@@ -10,5 +10,6 @@ import UIKit
 class HomeProfesionalCollectionViewCell: UICollectionViewCell {
     @IBOutlet var Skill: UILabel!
     @IBOutlet var foto: UIImageView!
+    @IBOutlet var skill2: UILabel!
     
 }
