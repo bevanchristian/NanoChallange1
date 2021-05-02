@@ -93,13 +93,20 @@ class elearnData{
         
     }
     
-    func it(){
+    func it(leaderboard:Bool){
         removeArray()
         let predicate = NSPredicate(format: "expertise == %@", "Tech / IT / IS")
-        let query = CKQuery(recordType: "User", predicate: predicate)
         
+        let query = CKQuery(recordType: "User", predicate: predicate)
+        if leaderboard{
+            print("leaderboard it")
+            query.sortDescriptors = [NSSortDescriptor(key: "point", ascending: true)]
+        }
         // ini dapetin record idnya
         let operation = CKQueryOperation(query: query)
+        if leaderboard{
+            operation.resultsLimit = 20
+        }
         operation.qualityOfService = .userInteractive
         operation.recordFetchedBlock = { [self] (record) in
             print("query anyar")
@@ -144,18 +151,11 @@ class elearnData{
         }
         
         operation.queryCompletionBlock = { [self] cursor ,error in
-            
-                  
                 print("RecordIDs it: \(recordIdit)")
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "API"), object: self)
-
             if recordIdit.count != nil {
        
                 print("ada")
-                
-//
-//
-               
             
         }else{
             // jika cloud ga ada manggil api dan dia nanti nyimpen kedalam cloud
@@ -175,20 +175,21 @@ class elearnData{
         }
         
         database.add(operation)
-        
-    
-        
-        
-        
     }
-    func design(){
+    func design(leaderboard:Bool){
         removeArray()
         let predicateDesign = NSPredicate(format: "expertise == %@", "Design")
         let queryDesign = CKQuery(recordType: "User", predicate: predicateDesign)
-        
+        if leaderboard{
+            queryDesign.sortDescriptors = [NSSortDescriptor(key: "point", ascending: true)]
+        }
         
         // ini dapetin record idnya
         let operationdesign = CKQueryOperation(query: queryDesign)
+        
+        if leaderboard{
+            operationdesign.resultsLimit = 20
+        }
         operationdesign.qualityOfService = .userInteractive
         operationdesign.recordFetchedBlock = { [self] (record) in
             print("query anyar")
@@ -241,13 +242,19 @@ class elearnData{
         database.add(operationdesign)
     }
     
-    func pro(){
+    func pro(leaderboard:Bool){
         removeArray()
         let predicatePro = NSPredicate(format: "expertise == %@", "Domain Expert (Keahlian Khusus)")
         let queryPro = CKQuery(recordType: "User", predicate: predicatePro)
-        
+        if leaderboard{
+            queryPro.sortDescriptors = [NSSortDescriptor(key: "point", ascending: false)]
+        }
         // ini dapetin record idnya
         let operationpro = CKQueryOperation(query: queryPro)
+        
+        if leaderboard{
+            operationpro.resultsLimit = 20
+        }
         operationpro.qualityOfService = .userInteractive
         operationpro.recordFetchedBlock = { [self] (record) in
             print("query anyar")
@@ -303,9 +310,9 @@ class elearnData{
     func GetData(myview:ViewController){
         
         
-        it()
-        design()
-        pro()
+        it(leaderboard: false)
+        design(leaderboard: false)
+        pro(leaderboard: false)
         
         
         removeArray()
