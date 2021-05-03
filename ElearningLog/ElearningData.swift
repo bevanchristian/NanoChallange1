@@ -8,6 +8,8 @@
 import Foundation
 import CloudKit
 import UIKit
+import Alamofire
+import AlamofireImage
 class elearnData{
     let nama = ""
     let photo = ""
@@ -135,6 +137,8 @@ class elearnData{
             model.point = (record["point"] as? String)!
             model.skill = (record["skill"] as? String)!
             model.photo = (record["foto"] as? String)!
+            
+            
         
             print("foto \(model.photo)")
             dataFix.append(model)

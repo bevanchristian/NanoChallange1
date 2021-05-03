@@ -7,7 +7,8 @@
 
 import UIKit
 import CloudKit
-
+import Alamofire
+import AlamofireImage
 protocol kirimNotif {
     func send()
 }
@@ -53,7 +54,7 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDele
     var expertiseUser:String = ""
     var skillUser:String = ""
     var pointUser:String = ""
-    var fotoUser:UIImage!
+    var fotoUser = ""
     var home:ViewController!
     var urutan:IndexPath!
     var tipe = 0
@@ -98,11 +99,30 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDele
             self.ReviewCollectionView.reloadData()
          
         }
+        _ = ImageDownloader(
+            configuration: ImageDownloader.defaultURLSessionConfiguration(),
+            downloadPrioritization: .fifo,
+            maximumActiveDownloads: 4,
+            imageCache: AutoPurgingImageCache()
+        )
+        
+        let downloader = ImageDownloader()
+        let urlRequest = URLRequest(url: URL(string:fotoUser)!)
+
+        downloader.download(urlRequest, completion:  { response in
+            print(response.request)
+            print(response.response)
+            debugPrint(response.result)
+            
+            if case .success(let image) = response.result {
+                self.foto.image = image
+            }
+        })
 
         
         textskill.delegate = self
         navigationItem.largeTitleDisplayMode = .never
-        foto.image = fotoUser
+       // foto.image = fotoUser
         point.text = pointUser
         skill.text = skillUser
         expertise.text = expertiseUser
@@ -188,7 +208,8 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDele
             let image = UIImage(data: data!)
             pindah.fotopindah = image
             pindah.deskrpsipindah = detail[indexPath.row].deskripsi
-            pindah.judupindah = detail[indexPath.row].deskripsi
+            pindah.judupindah = detail[indexPath.row].nama_belajar
+            pindah.urlpindah = detail[indexPath.row].url
             
             navigationController?.pushViewController(pindah, animated: true)
         }

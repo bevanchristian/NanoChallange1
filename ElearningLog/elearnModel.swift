@@ -18,6 +18,8 @@ struct elearnModel{
     var belajar = ""
     var point = ""
     var skill = ""
+    var imagecache:UIImage?
+    var isGetImage:Bool = false
     
     
     

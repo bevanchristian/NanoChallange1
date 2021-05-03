@@ -6,7 +6,8 @@
 //
 
 import UIKit
-
+import Alamofire
+import AlamofireImage
 class ViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource, kirimNotif {
     
     
@@ -73,16 +74,8 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         cell.home = self
         cell.urutan = indexPath
        if collectionView == self.collectionView{
-        /*cell.fotoUser = dataFix[indexPath.row].photo
-        
-        if (dataFix[indexPath.row].photo) != nil{
-            if let datafoto = try? Data(contentsOf: (URL(string: (dataFix[indexPath.row].photo as? String)!) ?? URL(string: "https://dl.airtable.com/.attachments/793d85215a4c8118e5c815854d5b3725/0ceb3359/FelindaGracia.jpg"))! ) {
-                   if let foto = UIImage(data: datafoto) {
-                    cell.fotoUser = foto
-                 
-                   }
-               }
-           }*/
+        cell.fotoUser = dataFix[indexPath.row].photo
+ 
         cell.expertiseUser = dataFix[indexPath.row].expertise
         cell.maubelajarapaUser = dataFix[indexPath.row].belajar
         cell.namaUser = dataFix[indexPath.row].nama
@@ -96,7 +89,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
             
             
         }else if collectionView == self.collectionViewDesign{
-           // cell.fotoUser = dataFixDesign[indexPath.row].photo
+            cell.fotoUser = dataFixDesign[indexPath.row].photo
             cell.expertiseUser = dataFixDesign[indexPath.row].expertise
             cell.maubelajarapaUser = dataFixDesign[indexPath.row].belajar
             cell.namaUser = dataFixDesign[indexPath.row].nama
@@ -106,7 +99,8 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
             cell.tipe = 2
         }else{
             
-           //cell.fotoUser = dataFixPro[indexPath.row].photo
+       
+            cell.fotoUser = dataFixPro[indexPath.row].photo
             cell.expertiseUser = dataFixPro[indexPath.row].expertise
             cell.maubelajarapaUser = dataFixPro[indexPath.row].belajar
             cell.namaUser = dataFixPro[indexPath.row].nama
@@ -138,12 +132,47 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         
         if collectionView == self.collectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? HomeCollectionViewCell
+            
             cell?.Skill.text = dataFix[indexPath.row].nama
-          //  cell?.foto.image = dataFix[indexPath.row].photo
             cell?.skill2.text = dataFix[indexPath.row].skill
-            /*self.layer.shadowColor = [[UIColor blackColor] CGColor];
-            self.layer.shadowRadius = 5;
-            self.layer.shadowOpacity = .25;*/
+            cell?.foto.image = nil
+      
+                if let imageCache = dataFix[indexPath.row].imagecache{
+                    cell?.foto.image = imageCache
+                }else {
+                    let downloader = ImageDownloader(
+                        configuration: ImageDownloader.defaultURLSessionConfiguration(),
+                        downloadPrioritization: .fifo,
+                        maximumActiveDownloads: 20,
+                        imageCache: AutoPurgingImageCache()
+                    )
+                    let urlRequest = URLRequest(url: URL(string: dataFix[indexPath.row].photo)!)
+
+                    downloader.download(urlRequest, completion:  { [self] response in
+                        print(response.request)
+                        print(response.response)
+                        debugPrint(response.result)
+                        
+                        if case .success(let image) = response.result {
+                            dataFix[indexPath.row].imagecache = image
+                            cell?.foto.image = image
+                        }
+                    })
+                }
+            
+           
+/*    let downloader = ImageDownloader(configuration: ImageDownloader.defaultURLSessionConfiguration(), downloadPrioritization: .lifo, maximumActiveDownloads: 5, imageCache: AutoPurgingImageCache())
+            let urlRequest = URLRequest(url: URL(string: dataFix[indexPath.row].photo)!)
+
+            downloader.download(urlRequest, completion:  { response in
+                print(response.request)
+                print(response.response)
+                debugPrint(response.result)
+                
+                if case .success(let image) = response.result {
+                    cell?.foto.image = image
+                }
+            }) */
 
             cell?.layer.shadowColor = UIColor.gray.cgColor
             cell?.layer.shadowRadius = 1
@@ -151,36 +180,48 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
             cell?.layer.shadowOffset = CGSize(width: 0, height: 3.0)
             cell?.clipsToBounds = false
             cell?.layer.masksToBounds = false
+
             
-           /* if (dataFix[indexPath.row].photo) != nil{
-                if let datafoto = try? Data(contentsOf: (URL(string: (dataFix[indexPath.row].photo as? String)!) ?? URL(string: "https://dl.airtable.com/.attachments/793d85215a4c8118e5c815854d5b3725/0ceb3359/FelindaGracia.jpg"))! ) {
-                       if let foto = UIImage(data: datafoto) {
-                        cell?.foto.image = foto
-                        collectionView.reloadData()
-                       }
-                   }
-               }*/
-            //cell?.foto.image = UIImage(named: "Leaderboard Copy")
-            print("jancok")
-            print( dataFix[indexPath.row].photo)
-            cell?.foto.downloadImageFrom(link: dataFix[indexPath.row].photo, contentMode: UIView.ContentMode.scaleAspectFit)
-            
+           
            
                //let recordID = CKRecord.ID(recordName: model.nama)
               
                
            
-            cell?.foto.layer.borderWidth = 1
+          /*  cell?.foto.layer.borderWidth = 1
             cell?.foto.layer.masksToBounds = false
             //cell?.foto.layer.borderColor = UIColor.black.cgColor
             cell?.foto.layer.cornerRadius = (cell?.foto.frame.height)!/2
-            cell?.foto.clipsToBounds = true
+            cell?.foto.clipsToBounds = true*/
             return cell!
         }else if collectionView == self.collectionViewDesign {
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "celldesign", for: indexPath) as? HomeDesignCollectionViewCell
             cell?.Skill.text = dataFixDesign[indexPath.row].nama
-           // cell?.foto.image = dataFixDesign[indexPath.row].photo
+          
+            
+            _ = ImageDownloader(
+                configuration: ImageDownloader.defaultURLSessionConfiguration(),
+                downloadPrioritization: .fifo,
+                maximumActiveDownloads: 4,
+                imageCache: AutoPurgingImageCache()
+            )
+            
+            let downloader = ImageDownloader()
+            let urlRequest = URLRequest(url: URL(string: dataFixDesign[indexPath.row].photo)!)
+
+            downloader.download(urlRequest, completion:  { response in
+                print(response.request)
+                print(response.response)
+                debugPrint(response.result)
+                
+                if case .success(let image) = response.result {
+                    cell?.foto.image?.af.imageRoundedIntoCircle()
+                    cell?.foto.image = image
+              
+                }
+            })
+
             cell?.skill2.text = dataFixDesign[indexPath.row].skill
             cell?.layer.shadowColor = UIColor.gray.cgColor
             cell?.layer.shadowRadius = 4
@@ -190,16 +231,36 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
             cell?.layer.masksToBounds = false
             
             
-            cell?.foto.layer.borderWidth = 1
+            /*    cell?.foto.layer.borderWidth = 1
             cell?.foto.layer.masksToBounds = false
             //cell?.foto.layer.borderColor = UIColor.black.cgColor
             cell?.foto.layer.cornerRadius = (cell?.foto.frame.height)!/2
-            cell?.foto.clipsToBounds = true
+            cell?.foto.clipsToBounds = true */
             return cell!
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellprofesional", for: indexPath) as? HomeProfesionalCollectionViewCell
             cell?.Skill.text = dataFixPro[indexPath.row].nama
             //cell?.foto.image = dataFixPro[indexPath.row].photo
+            
+            _ = ImageDownloader(
+                configuration: ImageDownloader.defaultURLSessionConfiguration(),
+                downloadPrioritization: .fifo,
+                maximumActiveDownloads: 4,
+                imageCache: AutoPurgingImageCache()
+            )
+            
+            let downloader = ImageDownloader()
+            let urlRequest = URLRequest(url: URL(string: dataFixPro[indexPath.row].photo)!)
+
+            downloader.download(urlRequest, completion:  { response in
+                print(response.request)
+                print(response.response)
+                debugPrint(response.result)
+                
+                if case .success(let image) = response.result {
+                    cell?.foto.image = image
+                }
+            })
             cell?.skill2.text = dataFixPro[indexPath.row].skill
             cell?.layer.shadowColor = UIColor.gray.cgColor
             cell?.layer.shadowRadius = 4
@@ -209,11 +270,11 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
             cell?.layer.masksToBounds = false
             
             
-            cell?.foto.layer.borderWidth = 1
+            /*   cell?.foto.layer.borderWidth = 1
             cell?.foto.layer.masksToBounds = false
             //cell?.foto.layer.borderColor = UIColor.black.cgColor
             cell?.foto.layer.cornerRadius = (cell?.foto.frame.height)!/2
-            cell?.foto.clipsToBounds = true
+            cell?.foto.clipsToBounds = true */
             return cell!
             
         }
@@ -224,16 +285,4 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
  
 
 
-}
-
-extension UIImageView {
-    func downloadImageFrom(link:String, contentMode: UIView.ContentMode) {
-        URLSession.shared.dataTask( with: NSURL(string:link)! as URL, completionHandler: {
-            (data, response, error) -> Void in
-            DispatchQueue.main.async {
-                self.contentMode =  contentMode
-                if let data = data { self.image = UIImage(data: data) }
-            }
-        }).resume()
-    }
 }

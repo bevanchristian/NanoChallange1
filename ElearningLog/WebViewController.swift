@@ -21,16 +21,25 @@ class WebViewController: UIViewController,WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let url = try? URL(string: urlpindah ?? "https://appledeveloperacademy.uc.ac.id") {
-            webView.load(URLRequest(url: url))
+        if verifyUrl(urlString: urlpindah){
+            webView.load(URLRequest(url: URL(string: urlpindah!)! ))
             webView.allowsBackForwardNavigationGestures = true
-            //pr kalo web e ga valid
+        }else{
+            webView.load(URLRequest(url: URL(string: "https://appledeveloperacademy.uc.ac.id")! ))
+            webView.allowsBackForwardNavigationGestures = true
         }
-       
         
         // Do any additional setup after loading the view.
     }
     
+    func verifyUrl (urlString: String?) -> Bool {
+        if let urlString = urlString {
+            if let url = NSURL(string: urlString) {
+                return UIApplication.shared.canOpenURL(url as URL)
+            }
+        }
+        return false
+    }
 
     /*
     // MARK: - Navigation

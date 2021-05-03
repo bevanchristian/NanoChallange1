@@ -35,7 +35,7 @@ class DetailBelajarViewController: UIViewController {
 
     @IBAction func url(_ sender: UIButton) {
         let pindah = (storyboard?.instantiateViewController(identifier: "webdetail"))! as WebViewController
-        pindah.urlpindah = deskrpsipindah
+        pindah.urlpindah = urlpindah
         navigationController?.pushViewController(pindah, animated: true)
     }
   

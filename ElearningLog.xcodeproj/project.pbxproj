@@ -31,9 +31,11 @@
 		503A5A46263EBCB700064EC8 /* LeaderboardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503A5A45263EBCB700064EC8 /* LeaderboardCollectionViewCell.swift */; };
 		503A5A49263EDD7900064EC8 /* DetailBelajarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503A5A48263EDD7900064EC8 /* DetailBelajarViewController.swift */; };
 		503A5A4C263EE11200064EC8 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503A5A4B263EE11200064EC8 /* WebViewController.swift */; };
+		C8A891AEE7EBD3C422117064 /* Pods_ElearningLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69A9BA4512D98D42863051D9 /* Pods_ElearningLog.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		056165EA432C6542426BB55D /* Pods-ElearningLog.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ElearningLog.release.xcconfig"; path = "Target Support Files/Pods-ElearningLog/Pods-ElearningLog.release.xcconfig"; sourceTree = "<group>"; };
 		503A59F62637CFFD00064EC8 /* ElearningLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ElearningLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		503A59F92637CFFD00064EC8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		503A59FB2637CFFD00064EC8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +63,8 @@
 		503A5A45263EBCB700064EC8 /* LeaderboardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardCollectionViewCell.swift; sourceTree = "<group>"; };
 		503A5A48263EDD7900064EC8 /* DetailBelajarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailBelajarViewController.swift; sourceTree = "<group>"; };
 		503A5A4B263EE11200064EC8 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		69A9BA4512D98D42863051D9 /* Pods_ElearningLog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ElearningLog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8196C60E7F63702A325D6D33 /* Pods-ElearningLog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ElearningLog.debug.xcconfig"; path = "Target Support Files/Pods-ElearningLog/Pods-ElearningLog.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,18 +73,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				503A5A1B2637F3F300064EC8 /* CloudKit.framework in Frameworks */,
+				C8A891AEE7EBD3C422117064 /* Pods_ElearningLog.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		263AA2A34FB6E7C8BD2DD8B2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8196C60E7F63702A325D6D33 /* Pods-ElearningLog.debug.xcconfig */,
+				056165EA432C6542426BB55D /* Pods-ElearningLog.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		503A59ED2637CFFC00064EC8 = {
 			isa = PBXGroup;
 			children = (
 				503A59F82637CFFD00064EC8 /* ElearningLog */,
 				503A59F72637CFFD00064EC8 /* Products */,
 				503A5A192637F3F300064EC8 /* Frameworks */,
+				263AA2A34FB6E7C8BD2DD8B2 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -128,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				503A5A1A2637F3F300064EC8 /* CloudKit.framework */,
+				69A9BA4512D98D42863051D9 /* Pods_ElearningLog.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -139,9 +156,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 503A5A0A2637CFFF00064EC8 /* Build configuration list for PBXNativeTarget "ElearningLog" */;
 			buildPhases = (
+				6B77CEC2D95ADBCD89D2037B /* [CP] Check Pods Manifest.lock */,
 				503A59F22637CFFD00064EC8 /* Sources */,
 				503A59F32637CFFD00064EC8 /* Frameworks */,
 				503A59F42637CFFD00064EC8 /* Resources */,
+				2C28312AEFA448DD542820C3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -196,6 +215,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2C28312AEFA448DD542820C3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ElearningLog/Pods-ElearningLog-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ElearningLog/Pods-ElearningLog-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ElearningLog/Pods-ElearningLog-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6B77CEC2D95ADBCD89D2037B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ElearningLog-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		503A59F22637CFFD00064EC8 /* Sources */ = {
@@ -365,6 +426,7 @@
 		};
 		503A5A0B2637CFFF00064EC8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8196C60E7F63702A325D6D33 /* Pods-ElearningLog.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -385,6 +447,7 @@
 		};
 		503A5A0C2637CFFF00064EC8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 056165EA432C6542426BB55D /* Pods-ElearningLog.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
