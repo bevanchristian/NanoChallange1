@@ -614,7 +614,9 @@ class elearnData{
   }// ahkir dari get data
     
    
-    func getDetail(nama:String){
+    func getDetail(nama:String,kedua:Bool){
+        
+        
       
         
         let predicateDetail = NSPredicate(format: "nama == %@", "\(nama)")

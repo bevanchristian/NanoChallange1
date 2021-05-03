@@ -13,11 +13,37 @@ protocol kirimNotif {
 }
 class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource, sendPoint{
     
+    var data:Bool = false
+    
     // ngisi point dari protocol
     func send(point: String) {
-        home.dataFixDesign[urutan.item].point = point
         self.point.text = point
-       //viewDidLoad()
+        // aray ne design bodoh
+        home.dataFixDesign[urutan.item].point = point
+        
+        if tipe == 1{
+            print("a")
+            home.dataFix[urutan.item].point = point
+          
+           
+          
+            
+        }else if tipe == 2{
+            print("ab")
+            home.dataFixDesign[urutan.item].point = point
+          
+        }else{
+            print("abc")
+            home.dataFixPro[urutan.item].point = point
+        
+        }
+
+        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: DispatchTime.now()+3) { [self] in
+            data = true
+            cekIsiBelajar = false
+            manggilData(kedua: true)
+        }
+      
     }
     
  
@@ -60,7 +86,7 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDele
        
         DispatchQueue.global(qos: .userInteractive
         ).async { [self] in
-            manggilData()
+            manggilData(kedua: false)
         }
         NotificationCenter.default.addObserver(forName: NSNotification.Name("detail"), object: nil, queue: OperationQueue.main) { [self] (notif) in
             let elearnVC = notif.object as?  elearnData
@@ -91,9 +117,13 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDele
     
     
     
-     func  manggilData(){
+    func  manggilData(kedua:Bool){
         print("masuk detail")
-        elearn.getDetail(nama: namaUser)
+        if data == true{
+            elearn.detail.removeAll()
+            detail.removeAll()
+        }
+        elearn.getDetail(nama: namaUser,kedua: kedua)
         elearn.getReview(nama: namaUser)
         
     }
