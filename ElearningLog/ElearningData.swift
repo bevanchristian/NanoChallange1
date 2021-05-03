@@ -134,6 +134,7 @@ class elearnData{
             model.belajar = (record["mau_belajar"] as? String)!
             model.point = (record["point"] as? String)!
             model.skill = (record["skill"] as? String)!
+            model.photo = (record["foto"] as? String)!
         
             print("foto \(model.photo)")
             dataFix.append(model)
@@ -208,6 +209,7 @@ class elearnData{
             model.belajar = (record["mau_belajar"] as? String)!
             model.point = (record["point"] as? String)!
             model.skill = (record["skill"] as? String)!
+            model.photo = (record["foto"] as? String)!
             print("foto \(model.photo)")
             dataFixDesign.append(model)
         }
@@ -274,6 +276,7 @@ class elearnData{
             model.belajar = (record["mau_belajar"] as? String)!
             model.point = (record["point"] as? String)!
             model.skill = (record["skill"] as? String)!
+            model.photo = (record["foto"] as? String)!
             print("foto \(model.photo)")
             dataFixPro.append(model)
         }
@@ -693,13 +696,8 @@ class elearnData{
                 var model = elearnModel()
                 model.nama = jsonDecoder[x].Name
                 
-                if photoArray[x] != nil{
-                    if let datafoto = try? Data(contentsOf: (URL(string: jsonDecoder[x].Photo) ?? URL(string: "https://dl.airtable.com/.attachments/793d85215a4c8118e5c815854d5b3725/0ceb3359/FelindaGracia.jpg"))! ) {
-                        if let foto = UIImage(data: datafoto) {
-                            model.photo = foto
-                        }
-                    }
-                }
+              
+                model.photo = jsonDecoder[x].Photo
                 model.expertise = jsonDecoder[x].Expertise
                 model.team = jsonDecoder[x].Team
                 model.shift = jsonDecoder[x].Shift
@@ -712,7 +710,7 @@ class elearnData{
                 
                 
                 // nyimpen ke cloud
-                saveProfil(name: model.nama, foto: model.photo!, belajar: model.belajar, point: model.point, skill: model.skill, expertise: model.expertise, shift: model.shift, team: model.team)
+                saveProfil(name: model.nama, foto: model.photo, belajar: model.belajar, point: model.point, skill: model.skill, expertise: model.expertise, shift: model.shift, team: model.team)
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "API"), object: self)
             }
            
@@ -725,7 +723,7 @@ class elearnData{
     
     
     
-    func saveProfil(name:String,foto:UIImage,belajar:String,point:String,skill:String,expertise:String,shift:String,team:String){
+    func saveProfil(name:String,foto:String,belajar:String,point:String,skill:String,expertise:String,shift:String,team:String){
         let record = CKRecord(recordType: "User")
         record.setValue(name, forKey: "nama")
         record.setValue(foto, forKey: "foto")

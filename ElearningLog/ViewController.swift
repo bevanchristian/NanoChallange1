@@ -73,7 +73,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         cell.home = self
         cell.urutan = indexPath
        if collectionView == self.collectionView{
-        cell.fotoUser = dataFix[indexPath.row].photo
+        /*cell.fotoUser = dataFix[indexPath.row].photo
         
         if (dataFix[indexPath.row].photo) != nil{
             if let datafoto = try? Data(contentsOf: (URL(string: (dataFix[indexPath.row].photo as? String)!) ?? URL(string: "https://dl.airtable.com/.attachments/793d85215a4c8118e5c815854d5b3725/0ceb3359/FelindaGracia.jpg"))! ) {
@@ -82,7 +82,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
                  
                    }
                }
-           }
+           }*/
         cell.expertiseUser = dataFix[indexPath.row].expertise
         cell.maubelajarapaUser = dataFix[indexPath.row].belajar
         cell.namaUser = dataFix[indexPath.row].nama
@@ -96,7 +96,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
             
             
         }else if collectionView == self.collectionViewDesign{
-            cell.fotoUser = dataFixDesign[indexPath.row].photo
+           // cell.fotoUser = dataFixDesign[indexPath.row].photo
             cell.expertiseUser = dataFixDesign[indexPath.row].expertise
             cell.maubelajarapaUser = dataFixDesign[indexPath.row].belajar
             cell.namaUser = dataFixDesign[indexPath.row].nama
@@ -106,7 +106,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
             cell.tipe = 2
         }else{
             
-            cell.fotoUser = dataFixPro[indexPath.row].photo
+           //cell.fotoUser = dataFixPro[indexPath.row].photo
             cell.expertiseUser = dataFixPro[indexPath.row].expertise
             cell.maubelajarapaUser = dataFixPro[indexPath.row].belajar
             cell.namaUser = dataFixPro[indexPath.row].nama
@@ -139,7 +139,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         if collectionView == self.collectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? HomeCollectionViewCell
             cell?.Skill.text = dataFix[indexPath.row].nama
-            cell?.foto.image = dataFix[indexPath.row].photo
+          //  cell?.foto.image = dataFix[indexPath.row].photo
             cell?.skill2.text = dataFix[indexPath.row].skill
             /*self.layer.shadowColor = [[UIColor blackColor] CGColor];
             self.layer.shadowRadius = 5;
@@ -152,14 +152,18 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
             cell?.clipsToBounds = false
             cell?.layer.masksToBounds = false
             
-            if (dataFix[indexPath.row].photo) != nil{
+           /* if (dataFix[indexPath.row].photo) != nil{
                 if let datafoto = try? Data(contentsOf: (URL(string: (dataFix[indexPath.row].photo as? String)!) ?? URL(string: "https://dl.airtable.com/.attachments/793d85215a4c8118e5c815854d5b3725/0ceb3359/FelindaGracia.jpg"))! ) {
                        if let foto = UIImage(data: datafoto) {
                         cell?.foto.image = foto
                         collectionView.reloadData()
                        }
                    }
-               }
+               }*/
+            //cell?.foto.image = UIImage(named: "Leaderboard Copy")
+            print("jancok")
+            print( dataFix[indexPath.row].photo)
+            cell?.foto.downloadImageFrom(link: dataFix[indexPath.row].photo, contentMode: UIView.ContentMode.scaleAspectFit)
             
            
                //let recordID = CKRecord.ID(recordName: model.nama)
@@ -176,7 +180,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "celldesign", for: indexPath) as? HomeDesignCollectionViewCell
             cell?.Skill.text = dataFixDesign[indexPath.row].nama
-            cell?.foto.image = dataFixDesign[indexPath.row].photo
+           // cell?.foto.image = dataFixDesign[indexPath.row].photo
             cell?.skill2.text = dataFixDesign[indexPath.row].skill
             cell?.layer.shadowColor = UIColor.gray.cgColor
             cell?.layer.shadowRadius = 4
@@ -195,7 +199,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellprofesional", for: indexPath) as? HomeProfesionalCollectionViewCell
             cell?.Skill.text = dataFixPro[indexPath.row].nama
-            cell?.foto.image = dataFixPro[indexPath.row].photo
+            //cell?.foto.image = dataFixPro[indexPath.row].photo
             cell?.skill2.text = dataFixPro[indexPath.row].skill
             cell?.layer.shadowColor = UIColor.gray.cgColor
             cell?.layer.shadowRadius = 4
@@ -213,6 +217,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
             return cell!
             
         }
+
     
     }
     
@@ -221,3 +226,14 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
 
 }
 
+extension UIImageView {
+    func downloadImageFrom(link:String, contentMode: UIView.ContentMode) {
+        URLSession.shared.dataTask( with: NSURL(string:link)! as URL, completionHandler: {
+            (data, response, error) -> Void in
+            DispatchQueue.main.async {
+                self.contentMode =  contentMode
+                if let data = data { self.image = UIImage(data: data) }
+            }
+        }).resume()
+    }
+}

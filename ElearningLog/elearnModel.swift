@@ -11,7 +11,7 @@ import CloudKit
 struct elearnModel{
     var id : CKRecord.ID!
     var nama = ""
-    var photo:UIImage? = nil
+    var photo = ""
     var expertise = ""
     var team = ""
     var shift = ""
