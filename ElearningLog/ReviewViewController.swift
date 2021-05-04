@@ -7,6 +7,10 @@
 
 import UIKit
 import CloudKit
+protocol sendReview {
+    func sendReview()
+}
+
 class ReviewViewController: UIViewController {
 
     @IBOutlet var review: UITextView!
@@ -15,15 +19,18 @@ class ReviewViewController: UIViewController {
     let database = CKContainer(identifier: "iCloud.ElearningLog").publicCloudDatabase
     var id:CKRecord.ID!
     var namauser:String!
+    var delegate:sendReview?
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Add Review"
+ 
 
         // Do any additional setup after loading the view.
     }
     
     @IBAction func save(_ sender: UIBarButtonItem) {
         saveProfil(nama: namauser, nama_review: nama.text!, review: review.text)
+        delegate!.sendReview()
         dismiss(animated: true)
        
     }

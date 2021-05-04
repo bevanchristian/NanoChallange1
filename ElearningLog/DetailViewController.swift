@@ -12,43 +12,14 @@ import AlamofireImage
 protocol kirimNotif {
     func send()
 }
-class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource, sendPoint{
+class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource, sendPoint, sendReview{
+  
+    
+    @IBOutlet var editSkill: UIButton!
+    
+    @IBOutlet var editBelajar: UIButton!
     
     var data:Bool = false
-    
-    // ngisi point dari protocol
-    func send(point: String) {
-        self.point.text = point
-        // aray ne design bodoh
-        home.dataFixDesign[urutan.item].point = point
-        
-        if tipe == 1{
-            print("a")
-            home.dataFix[urutan.item].point = point
-          
-           
-          
-            
-        }else if tipe == 2{
-            print("ab")
-            home.dataFixDesign[urutan.item].point = point
-          
-        }else{
-            print("abc")
-            home.dataFixPro[urutan.item].point = point
-        
-        }
-
-        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: DispatchTime.now()+3) { [self] in
-            data = true
-            cekIsiBelajar = false
-            manggilData(kedua: true)
-        }
-      
-    }
-    
- 
-    
     var namaUser:String = ""
     var maubelajarapaUser:String = ""
     var expertiseUser:String = ""
@@ -64,6 +35,9 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDele
     var review = [reviewModel]()
     var cekIsiBelajar = false
     var cekIsiReview = false
+    
+    var counterSkill = 0
+    var counterBelajar = 0
     @IBOutlet var ReviewCollectionView: UICollectionView!
     @IBOutlet var LearnCollectionView: UICollectionView!
     @IBOutlet var buttonSend: UIButton!
@@ -79,6 +53,8 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDele
     var delegate2:kirimNotif!
     override func viewDidLoad() {
         super.viewDidLoad()
+        skill.isEditable = false
+        maubelajarapa.isEditable = false
         LearnCollectionView.delegate = self
         LearnCollectionView.dataSource = self
         
@@ -119,7 +95,10 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDele
             }
         })
 
-        
+        foto.layer.cornerRadius = (foto.frame.size.width) / 2
+        foto.clipsToBounds = true
+        foto.layer.borderWidth = 2
+       foto.layer.borderColor = UIColor.white.cgColor
         textskill.delegate = self
         navigationItem.largeTitleDisplayMode = .never
        // foto.image = fotoUser
@@ -134,13 +113,52 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDele
         
         // Do any additional setup after loading the view.
     }
+    // ngisi point dari protocol
+    func send(point: String) {
+        self.point.text = point
+        // aray ne design bodoh
+        home.dataFixDesign[urutan.item].point = point
+        
+        if tipe == 1{
+            print("a")
+            home.dataFix[urutan.item].point = point
+          
+           
+          
+            
+        }else if tipe == 2{
+            print("ab")
+            home.dataFixDesign[urutan.item].point = point
+          
+        }else{
+            print("abc")
+            home.dataFixPro[urutan.item].point = point
+        
+        }
+
+        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: DispatchTime.now()+3) { [self] in
+            data = true
+            cekIsiBelajar = false
+            manggilData(kedua: true)
+        }
+      
+    }
     
+    func sendReview() {
+        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: DispatchTime.now()+3) { [self] in
+            data = true
+            cekIsiBelajar = false
+            manggilData(kedua: true)
+        }
+    }
     
     
     func  manggilData(kedua:Bool){
         print("masuk detail")
         if data == true{
             elearn.detail.removeAll()
+            elearn.review.removeAll()
+            review.removeAll()
             detail.removeAll()
         }
         elearn.getDetail(nama: namaUser,kedua: kedua)
@@ -181,6 +199,19 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDele
                 let data = try? Data(contentsOf: (detail[indexPath.row].Foto?.fileURL)!)
                 let image = UIImage(data: data!)
                 cell.foto.image = image
+                cell.foto.layer.cornerRadius = ( cell.foto.frame.size.width) / 4
+                cell.foto.clipsToBounds = true
+                cell.foto.layer.borderWidth = 2
+                cell.foto.layer.borderColor = UIColor.white.cgColor
+                
+                
+                cell.layer.shadowColor = UIColor.gray.cgColor
+                cell.layer.shadowRadius = 1
+                cell.layer.shadowOpacity = 0.25
+                cell.layer.shadowOffset = CGSize(width: 0, height: 3.0)
+                cell.clipsToBounds = false
+                cell.layer.masksToBounds = false
+                cell.layer.cornerRadius = 10
             }else{
                 cell.label.text = "User belum belajar"
             }
@@ -190,6 +221,7 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDele
             if cekIsiReview{
                 cell.nama.text = review[indexPath.row].nama_review
                 cell.reviewText.text = review[indexPath.row].review
+            
                 
             }else{
                 cell.nama.text = "Uknown"
@@ -218,6 +250,45 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDele
     }
     
     
+    // UNTUK EDIT SKILL DAN BELAJAR
+    
+    @IBAction func belajarAction(_ sender: UIButton) {
+        counterBelajar += 1
+        if counterBelajar % 2 != 0{
+            maubelajarapa.isEditable = true
+            maubelajarapa.layer.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            // jadi done image kosong
+            editBelajar.setTitle("Done", for: .normal)
+            editBelajar.setImage(nil, for: .normal)
+           
+           
+      
+        }else{
+            maubelajarapa.layer.backgroundColor = nil
+            maubelajarapa.isEditable = false
+            editBelajar.setImage(UIImage(systemName: "pencil"), for: .normal)
+            editBelajar.setTitle("", for: .normal)
+        }
+       
+        
+        
+    }
+    @IBAction func skillAction(_ sender: UIButton) {
+        counterSkill += 1
+        if counterSkill % 2 != 0{
+            skill.isEditable = true
+            skill.layer.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            editSkill.setImage(UIImage(systemName: ""), for: .normal)
+            editSkill.setTitle("Done", for: .normal)
+      
+        }else{
+            skill.layer.backgroundColor = nil
+            skill.isEditable = false
+            editSkill.setImage(UIImage(systemName: "pencil"), for: .normal)
+            editSkill.setTitle("", for: .normal)
+        }
+    }
+    
     
     
     
@@ -244,6 +315,7 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDele
         pindah.modalTransitionStyle = .coverVertical
         pindah.id = id
         pindah.namauser = nama.text
+        pindah.delegate = self
         navigationController?.present(pindah, animated: true)
     }
     

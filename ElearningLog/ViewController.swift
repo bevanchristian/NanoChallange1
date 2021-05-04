@@ -18,7 +18,8 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     
  
     
-
+    @IBOutlet var scroll: UIScrollView!
+    
     @IBOutlet var collectionViewProfesional: UICollectionView!
     @IBOutlet var collectionViewDesign: UICollectionView!
     
@@ -28,11 +29,12 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     var dataFix = [elearnModel]()
     var dataFixDesign = [elearnModel]()
     var dataFixPro = [elearnModel]()
-
+    let refreshControl = UIRefreshControl()
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Learning Explorer"
-    
+      
+        configureRefreshControl()
         navigationController?.navigationBar.prefersLargeTitles = true
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -61,7 +63,34 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         }
 
     }
+    @objc func refresh(_ sender: AnyObject) {
+        self.collectionView.reloadData()
+        self.collectionViewDesign.reloadData()
+        self.collectionViewProfesional.reloadData()
+        refreshControl.endRefreshing()
+    }
     
+    
+    func configureRefreshControl () {
+       // Add the refresh control to your UIScrollView object.
+       scroll.refreshControl = UIRefreshControl()
+       scroll.refreshControl?.addTarget(self, action:
+                                          #selector(handleRefreshControl),
+                                          for: .valueChanged)
+    }
+
+    @objc func handleRefreshControl() {
+       // Update your content…
+
+       // Dismiss the refresh control.
+       DispatchQueue.main.async {
+      
+            self.collectionView.reloadData()
+            self.collectionViewDesign.reloadData()
+            self.collectionViewProfesional.reloadData()
+            self.scroll.refreshControl?.endRefreshing()
+       }
+    }
     
    
     @objc func manggilData(){
@@ -136,9 +165,15 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
             cell?.Skill.text = dataFix[indexPath.row].nama
             cell?.skill2.text = dataFix[indexPath.row].skill
             cell?.foto.image = nil
+            
+          /*  DispatchQueue.global(qos: .default).async { [self] in
+            
       
                 if let imageCache = dataFix[indexPath.row].imagecache{
-                    cell?.foto.image = imageCache
+                    DispatchQueue.main.async {
+                        cell?.foto.image = imageCache
+                    }
+ 
                 }else {
                     let downloader = ImageDownloader(
                         configuration: ImageDownloader.defaultURLSessionConfiguration(),
@@ -155,11 +190,15 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
                         
                         if case .success(let image) = response.result {
                             dataFix[indexPath.row].imagecache = image
-                            cell?.foto.image = image
+                            DispatchQueue.main.async {
+                                cell?.foto.image = image
+                            }
+                
                         }
                     })
                 }
-            
+                
+            }*/
            
 /*    let downloader = ImageDownloader(configuration: ImageDownloader.defaultURLSessionConfiguration(), downloadPrioritization: .lifo, maximumActiveDownloads: 5, imageCache: AutoPurgingImageCache())
             let urlRequest = URLRequest(url: URL(string: dataFix[indexPath.row].photo)!)
@@ -173,13 +212,22 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
                     cell?.foto.image = image
                 }
             }) */
+            
+            if let imageUrl =  URL(string: dataFix[indexPath.row].photo){
+                                    cell?.foto.af.setImage(withURL: imageUrl, placeholderImage: UIImage(named: "defaultImage"))
+                                }
 
+            cell?.foto.layer.cornerRadius = (cell?.foto.frame.size.width)! / 2
+            cell?.foto.clipsToBounds = true
+            cell?.foto.layer.borderWidth = 2
+            cell?.foto.layer.borderColor = UIColor.white.cgColor
             cell?.layer.shadowColor = UIColor.gray.cgColor
             cell?.layer.shadowRadius = 1
             cell?.layer.shadowOpacity = 0.25
             cell?.layer.shadowOffset = CGSize(width: 0, height: 3.0)
             cell?.clipsToBounds = false
             cell?.layer.masksToBounds = false
+            cell?.layer.cornerRadius = 6
 
             
            
@@ -200,27 +248,47 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
             cell?.Skill.text = dataFixDesign[indexPath.row].nama
           
             
-            _ = ImageDownloader(
-                configuration: ImageDownloader.defaultURLSessionConfiguration(),
-                downloadPrioritization: .fifo,
-                maximumActiveDownloads: 4,
-                imageCache: AutoPurgingImageCache()
-            )
+           /* DispatchQueue.global(qos: .default).async { [self] in
             
-            let downloader = ImageDownloader()
-            let urlRequest = URLRequest(url: URL(string: dataFixDesign[indexPath.row].photo)!)
+      
+                if let imageCache = dataFixDesign[indexPath.row].imagecache{
+                    DispatchQueue.main.async {
+                        cell!.foto.image = imageCache
+                    }
+ 
+                }else {
+                    let downloader = ImageDownloader(
+                        configuration: ImageDownloader.defaultURLSessionConfiguration(),
+                        downloadPrioritization: .fifo,
+                        maximumActiveDownloads: 20,
+                        imageCache: AutoPurgingImageCache()
+                    )
+                    let urlRequest = URLRequest(url: URL(string: dataFixDesign[indexPath.row].photo)!)
 
-            downloader.download(urlRequest, completion:  { response in
-                print(response.request)
-                print(response.response)
-                debugPrint(response.result)
+                    downloader.download(urlRequest, completion:  { [self] response in
+                        print(response.request)
+                        print(response.response)
+                        debugPrint(response.result)
+                        
+                        if case .success(let image) = response.result {
+                            dataFixDesign[indexPath.row].imagecache = image
+                            DispatchQueue.main.async {
+                                cell!.foto.image = image
+                            }
                 
-                if case .success(let image) = response.result {
-                    cell?.foto.image?.af.imageRoundedIntoCircle()
-                    cell?.foto.image = image
-              
+                        }
+                    })
                 }
-            })
+                
+            }*/
+            if let imageUrl =  URL(string: dataFixDesign[indexPath.row].photo){
+                                    cell?.foto.af.setImage(withURL: imageUrl, placeholderImage: UIImage(named: "defaultImage"))
+                                }
+            
+            cell?.foto.layer.cornerRadius = (cell?.foto.frame.size.width)! / 2
+            cell?.foto.clipsToBounds = true
+            cell?.foto.layer.borderWidth = 2
+            cell?.foto.layer.borderColor = UIColor.white.cgColor
 
             cell?.skill2.text = dataFixDesign[indexPath.row].skill
             cell?.layer.shadowColor = UIColor.gray.cgColor
@@ -229,7 +297,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
             cell?.layer.shadowOffset = CGSize(width: 0, height: 3.0)
             cell?.clipsToBounds = false
             cell?.layer.masksToBounds = false
-            
+            cell?.layer.cornerRadius = 6
             
             /*    cell?.foto.layer.borderWidth = 1
             cell?.foto.layer.masksToBounds = false
@@ -242,25 +310,50 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
             cell?.Skill.text = dataFixPro[indexPath.row].nama
             //cell?.foto.image = dataFixPro[indexPath.row].photo
             
-            _ = ImageDownloader(
-                configuration: ImageDownloader.defaultURLSessionConfiguration(),
-                downloadPrioritization: .fifo,
-                maximumActiveDownloads: 4,
-                imageCache: AutoPurgingImageCache()
-            )
+          /*  DispatchQueue.global(qos: .default).async { [self] in
             
-            let downloader = ImageDownloader()
-            let urlRequest = URLRequest(url: URL(string: dataFixPro[indexPath.row].photo)!)
+      
+                if let imageCache = dataFixPro[indexPath.row].imagecache{
+                    DispatchQueue.main.async {
+                        cell!.foto.image = imageCache
+                    }
+ 
+                }else {
+                    let downloader = ImageDownloader(
+                        configuration: ImageDownloader.defaultURLSessionConfiguration(),
+                        downloadPrioritization: .fifo,
+                        maximumActiveDownloads: 20,
+                        imageCache: AutoPurgingImageCache()
+                    )
+                    let urlRequest = URLRequest(url: URL(string: dataFixPro[indexPath.row].photo)!)
 
-            downloader.download(urlRequest, completion:  { response in
-                print(response.request)
-                print(response.response)
-                debugPrint(response.result)
+                    downloader.download(urlRequest, completion:  { [self] response in
+                        print(response.request)
+                        print(response.response)
+                        debugPrint(response.result)
+                        
+                        if case .success(let image) = response.result {
+                            dataFixPro[indexPath.row].imagecache = image
+                            DispatchQueue.main.async {
+                                cell!.foto.image = image
+                            }
                 
-                if case .success(let image) = response.result {
-                    cell?.foto.image = image
+                        }
+                    })
                 }
-            })
+                
+            }*/
+            
+            
+            
+            if let imageUrl =  URL(string: dataFixPro[indexPath.row].photo){
+                                    cell?.foto.af.setImage(withURL: imageUrl, placeholderImage: UIImage(named: "defaultImage"))
+                                }
+            
+            cell?.foto.layer.cornerRadius = (cell?.foto.frame.size.width)! / 2
+            cell?.foto.clipsToBounds = true
+            cell?.foto.layer.borderWidth = 2
+            cell?.foto.layer.borderColor = UIColor.white.cgColor
             cell?.skill2.text = dataFixPro[indexPath.row].skill
             cell?.layer.shadowColor = UIColor.gray.cgColor
             cell?.layer.shadowRadius = 4
@@ -268,7 +361,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
             cell?.layer.shadowOffset = CGSize(width: 0, height: 3.0)
             cell?.clipsToBounds = false
             cell?.layer.masksToBounds = false
-            
+            cell?.layer.cornerRadius = 6
             
             /*   cell?.foto.layer.borderWidth = 1
             cell?.foto.layer.masksToBounds = false
