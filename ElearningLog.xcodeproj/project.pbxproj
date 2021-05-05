@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -31,6 +31,12 @@
 		503A5A46263EBCB700064EC8 /* LeaderboardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503A5A45263EBCB700064EC8 /* LeaderboardCollectionViewCell.swift */; };
 		503A5A49263EDD7900064EC8 /* DetailBelajarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503A5A48263EDD7900064EC8 /* DetailBelajarViewController.swift */; };
 		503A5A4C263EE11200064EC8 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503A5A4B263EE11200064EC8 /* WebViewController.swift */; };
+		50C6DC5E26421FCB0025631B /* ResourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C6DC5D26421FCB0025631B /* ResourceViewController.swift */; };
+		50C6DC612642206D0025631B /* ResourceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C6DC602642206D0025631B /* ResourceData.swift */; };
+		50C6DC64264220C90025631B /* ResourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C6DC63264220C90025631B /* ResourceModel.swift */; };
+		50C6DC672642286A0025631B /* resourceDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C6DC662642286A0025631B /* resourceDataModel.swift */; };
+		50C6DC6A26422B430025631B /* ResourceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C6DC6926422B430025631B /* ResourceTableViewCell.swift */; };
+		50C6DC6D26422DD80025631B /* WebResourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C6DC6C26422DD80025631B /* WebResourceViewController.swift */; };
 		C8A891AEE7EBD3C422117064 /* Pods_ElearningLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69A9BA4512D98D42863051D9 /* Pods_ElearningLog.framework */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +69,12 @@
 		503A5A45263EBCB700064EC8 /* LeaderboardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardCollectionViewCell.swift; sourceTree = "<group>"; };
 		503A5A48263EDD7900064EC8 /* DetailBelajarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailBelajarViewController.swift; sourceTree = "<group>"; };
 		503A5A4B263EE11200064EC8 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		50C6DC5D26421FCB0025631B /* ResourceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceViewController.swift; sourceTree = "<group>"; };
+		50C6DC602642206D0025631B /* ResourceData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceData.swift; sourceTree = "<group>"; };
+		50C6DC63264220C90025631B /* ResourceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceModel.swift; sourceTree = "<group>"; };
+		50C6DC662642286A0025631B /* resourceDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = resourceDataModel.swift; sourceTree = "<group>"; };
+		50C6DC6926422B430025631B /* ResourceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceTableViewCell.swift; sourceTree = "<group>"; };
+		50C6DC6C26422DD80025631B /* WebResourceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebResourceViewController.swift; sourceTree = "<group>"; };
 		69A9BA4512D98D42863051D9 /* Pods_ElearningLog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ElearningLog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8196C60E7F63702A325D6D33 /* Pods-ElearningLog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ElearningLog.debug.xcconfig"; path = "Target Support Files/Pods-ElearningLog/Pods-ElearningLog.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -86,7 +98,6 @@
 				8196C60E7F63702A325D6D33 /* Pods-ElearningLog.debug.xcconfig */,
 				056165EA432C6542426BB55D /* Pods-ElearningLog.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -136,6 +147,12 @@
 				503A5A45263EBCB700064EC8 /* LeaderboardCollectionViewCell.swift */,
 				503A5A48263EDD7900064EC8 /* DetailBelajarViewController.swift */,
 				503A5A4B263EE11200064EC8 /* WebViewController.swift */,
+				50C6DC5D26421FCB0025631B /* ResourceViewController.swift */,
+				50C6DC602642206D0025631B /* ResourceData.swift */,
+				50C6DC63264220C90025631B /* ResourceModel.swift */,
+				50C6DC662642286A0025631B /* resourceDataModel.swift */,
+				50C6DC6926422B430025631B /* ResourceTableViewCell.swift */,
+				50C6DC6C26422DD80025631B /* WebResourceViewController.swift */,
 			);
 			path = ElearningLog;
 			sourceTree = "<group>";
@@ -263,10 +280,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50C6DC6A26422B430025631B /* ResourceTableViewCell.swift in Sources */,
 				503A5A46263EBCB700064EC8 /* LeaderboardCollectionViewCell.swift in Sources */,
 				503A5A2A26395C0600064EC8 /* HomeProfesionalCollectionViewCell.swift in Sources */,
 				503A5A3A263D653E00064EC8 /* reviewModel.swift in Sources */,
 				503A5A4C263EE11200064EC8 /* WebViewController.swift in Sources */,
+				50C6DC64264220C90025631B /* ResourceModel.swift in Sources */,
 				503A5A202638211900064EC8 /* HomeCollectionViewCell.swift in Sources */,
 				503A5A152637F2EF00064EC8 /* elearnModel.swift in Sources */,
 				503A59FE2637CFFD00064EC8 /* ViewController.swift in Sources */,
@@ -277,12 +296,16 @@
 				503A5A3D263D68ED00064EC8 /* BelajarViewController.swift in Sources */,
 				503A5A122637F02B00064EC8 /* ElearningData.swift in Sources */,
 				503A5A30263D551200064EC8 /* DetailReviewCollectionViewCell.swift in Sources */,
+				50C6DC5E26421FCB0025631B /* ResourceViewController.swift in Sources */,
 				503A5A43263EB94B00064EC8 /* LeaderboardViewController.swift in Sources */,
 				503A5A33263D5AB500064EC8 /* detailModel.swift in Sources */,
+				50C6DC6D26422DD80025631B /* WebResourceViewController.swift in Sources */,
 				503A5A2726393FCB00064EC8 /* HomeDesignCollectionViewCell.swift in Sources */,
 				503A5A0F2637D02100064EC8 /* data.swift in Sources */,
 				503A5A2D263D50C100064EC8 /* DetailWhatLearnCollectionViewCell.swift in Sources */,
+				50C6DC672642286A0025631B /* resourceDataModel.swift in Sources */,
 				503A5A2426383CDD00064EC8 /* DetailViewController.swift in Sources */,
+				50C6DC612642206D0025631B /* ResourceData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
