@@ -12,4 +12,13 @@ class LeaderboardCollectionViewCell: UICollectionViewCell {
     @IBOutlet var foto: UIImageView!
     @IBOutlet var nama: UILabel!
     @IBOutlet var point: UILabel!
+    
+    
+    override func layoutSubviews() {
+            self.layer.cornerRadius = 10
+        }
+    
 }
+
+
+

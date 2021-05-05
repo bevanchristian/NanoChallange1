@@ -12,7 +12,7 @@ import AlamofireImage
 protocol kirimNotif {
     func send()
 }
-class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource, sendPoint, sendReview{
+class DetailViewController: UIViewController, UITextViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource, sendPoint, sendReview{
   
     
     @IBOutlet var editSkill: UIButton!
@@ -54,12 +54,16 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         skill.isEditable = false
+        skill.delegate = self
         maubelajarapa.isEditable = false
         LearnCollectionView.delegate = self
         LearnCollectionView.dataSource = self
         
         ReviewCollectionView.delegate = self
         ReviewCollectionView.dataSource = self
+        
+//        skill.textContainer.maximumNumberOfLines = 1
+//        skill.textContainer.lineBreakMode = .byWordWrapping
        
         DispatchQueue.global(qos: .userInteractive
         ).async { [self] in
@@ -94,7 +98,10 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDele
                 self.foto.image = image
             }
         })
+        //skill dan mau belajar apa
 
+      
+        
         foto.layer.cornerRadius = (foto.frame.size.width) / 2
         foto.clipsToBounds = true
         foto.layer.borderWidth = 2
@@ -113,11 +120,15 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDele
         
         // Do any additional setup after loading the view.
     }
+    
+    
+    
+    
     // ngisi point dari protocol
     func send(point: String) {
         self.point.text = point
         // aray ne design bodoh
-        home.dataFixDesign[urutan.item].point = point
+        //home.dataFixDesign[urutan.item].point = point
         
         if tipe == 1{
             print("a")
@@ -143,6 +154,21 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDele
         }
       
     }
+    
+    
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+            let existingLines = textView.text.components(separatedBy: CharacterSet.newlines)
+            let newLines = text.components(separatedBy: CharacterSet.newlines)
+            let linesAfterChange = existingLines.count + newLines.count - 1
+            if(text == "\n") {
+                return linesAfterChange <= textView.textContainer.maximumNumberOfLines
+            }
+            let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
+            let numberOfChars = newText.count
+            return numberOfChars <= 45 // 30 characters limit
+        }
+    
     
     func sendReview() {
         DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: DispatchTime.now()+3) { [self] in
@@ -193,6 +219,13 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDele
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == LearnCollectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "learncell", for: indexPath) as! DetailWhatLearnCollectionViewCell
+            cell.layer.shadowColor = UIColor.gray.cgColor
+            cell.layer.shadowRadius = 1
+            cell.layer.shadowOpacity = 0.25
+            cell.layer.shadowOffset = CGSize(width: 0, height: 3.0)
+            cell.clipsToBounds = false
+            cell.layer.masksToBounds = false
+            cell.layer.cornerRadius = 10
             if cekIsiBelajar{
                 cell.label.text = detail[indexPath.row].nama_belajar
                // cell.foto.image = detail[indexPath.row].Foto
@@ -205,22 +238,24 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDele
                 cell.foto.layer.borderColor = UIColor.white.cgColor
                 
                 
-                cell.layer.shadowColor = UIColor.gray.cgColor
-                cell.layer.shadowRadius = 1
-                cell.layer.shadowOpacity = 0.25
-                cell.layer.shadowOffset = CGSize(width: 0, height: 3.0)
-                cell.clipsToBounds = false
-                cell.layer.masksToBounds = false
-                cell.layer.cornerRadius = 10
+               
             }else{
                 cell.label.text = "User belum belajar"
             }
             return cell
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "reviewcell", for: indexPath) as! DetailReviewCollectionViewCell
+            cell.layer.shadowColor = UIColor.gray.cgColor
+            cell.layer.shadowRadius = 1
+            cell.layer.shadowOpacity = 0.25
+            cell.layer.shadowOffset = CGSize(width: 0, height: 3.0)
+            cell.clipsToBounds = false
+            cell.layer.masksToBounds = false
+            cell.layer.cornerRadius = 10
             if cekIsiReview{
                 cell.nama.text = review[indexPath.row].nama_review
                 cell.reviewText.text = review[indexPath.row].review
+                
             
                 
             }else{
@@ -257,7 +292,13 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDele
         if counterBelajar % 2 != 0{
             maubelajarapa.isEditable = true
             maubelajarapa.layer.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-            // jadi done image kosong
+            maubelajarapa.layer.shadowColor = UIColor.gray.cgColor
+            maubelajarapa.layer.shadowRadius = 1
+            maubelajarapa.layer.shadowOpacity = 0.25
+            maubelajarapa.layer.shadowOffset = CGSize(width: 0, height: 1.0)
+            maubelajarapa.clipsToBounds = false
+            maubelajarapa.layer.masksToBounds = false
+            maubelajarapa.layer.cornerRadius = 7
             editBelajar.setTitle("Done", for: .normal)
             editBelajar.setImage(nil, for: .normal)
            
@@ -266,8 +307,8 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDele
         }else{
             maubelajarapa.layer.backgroundColor = nil
             maubelajarapa.isEditable = false
-            editBelajar.setImage(UIImage(systemName: "pencil"), for: .normal)
-            editBelajar.setTitle("", for: .normal)
+           // editBelajar.setImage(UIImage(systemName: "pencil"), for: .normal)
+            editBelajar.setTitle("Edit", for: .normal)
         }
        
         
@@ -278,14 +319,21 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UITextViewDele
         if counterSkill % 2 != 0{
             skill.isEditable = true
             skill.layer.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-            editSkill.setImage(UIImage(systemName: ""), for: .normal)
+            //editSkill.setImage(UIImage(systemName: ""), for: .normal)
+            skill.layer.shadowColor = UIColor.gray.cgColor
+            skill.layer.shadowRadius = 1
+            skill.layer.shadowOpacity = 0.25
+            skill.layer.shadowOffset = CGSize(width: 0, height: 2.0)
+            skill.clipsToBounds = false
+            skill.layer.masksToBounds = false
+            skill.layer.cornerRadius = 7
             editSkill.setTitle("Done", for: .normal)
       
         }else{
             skill.layer.backgroundColor = nil
             skill.isEditable = false
-            editSkill.setImage(UIImage(systemName: "pencil"), for: .normal)
-            editSkill.setTitle("", for: .normal)
+           // editSkill.setImage(UIImage(systemName: "pencil"), for: .normal)
+            editSkill.setTitle("Edit", for: .normal)
         }
     }
     

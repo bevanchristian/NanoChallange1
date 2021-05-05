@@ -21,9 +21,9 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     @IBOutlet var scroll: UIScrollView!
     
     @IBOutlet var collectionViewProfesional: UICollectionView!
-    @IBOutlet var collectionViewDesign: UICollectionView!
+    @IBOutlet var collectionViewDesign: UICollectionView!//design
     
-    @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet var collectionView: UICollectionView!//it
     let elearn = elearnData()
     let hasilJson:dataExplor! = nil
     var dataFix = [elearnModel]()
@@ -159,59 +159,16 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
+        
         if collectionView == self.collectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? HomeCollectionViewCell
-            
+            //data fix array it
             cell?.Skill.text = dataFix[indexPath.row].nama
             cell?.skill2.text = dataFix[indexPath.row].skill
             cell?.foto.image = nil
             
-          /*  DispatchQueue.global(qos: .default).async { [self] in
-            
-      
-                if let imageCache = dataFix[indexPath.row].imagecache{
-                    DispatchQueue.main.async {
-                        cell?.foto.image = imageCache
-                    }
- 
-                }else {
-                    let downloader = ImageDownloader(
-                        configuration: ImageDownloader.defaultURLSessionConfiguration(),
-                        downloadPrioritization: .fifo,
-                        maximumActiveDownloads: 20,
-                        imageCache: AutoPurgingImageCache()
-                    )
-                    let urlRequest = URLRequest(url: URL(string: dataFix[indexPath.row].photo)!)
+         
 
-                    downloader.download(urlRequest, completion:  { [self] response in
-                        print(response.request)
-                        print(response.response)
-                        debugPrint(response.result)
-                        
-                        if case .success(let image) = response.result {
-                            dataFix[indexPath.row].imagecache = image
-                            DispatchQueue.main.async {
-                                cell?.foto.image = image
-                            }
-                
-                        }
-                    })
-                }
-                
-            }*/
-           
-/*    let downloader = ImageDownloader(configuration: ImageDownloader.defaultURLSessionConfiguration(), downloadPrioritization: .lifo, maximumActiveDownloads: 5, imageCache: AutoPurgingImageCache())
-            let urlRequest = URLRequest(url: URL(string: dataFix[indexPath.row].photo)!)
-
-            downloader.download(urlRequest, completion:  { response in
-                print(response.request)
-                print(response.response)
-                debugPrint(response.result)
-                
-                if case .success(let image) = response.result {
-                    cell?.foto.image = image
-                }
-            }) */
             
             if let imageUrl =  URL(string: dataFix[indexPath.row].photo){
                                     cell?.foto.af.setImage(withURL: imageUrl, placeholderImage: UIImage(named: "defaultImage"))
@@ -230,57 +187,14 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
             cell?.layer.cornerRadius = 6
 
             
-           
-           
-               //let recordID = CKRecord.ID(recordName: model.nama)
-              
-               
-           
-          /*  cell?.foto.layer.borderWidth = 1
-            cell?.foto.layer.masksToBounds = false
-            //cell?.foto.layer.borderColor = UIColor.black.cgColor
-            cell?.foto.layer.cornerRadius = (cell?.foto.frame.height)!/2
-            cell?.foto.clipsToBounds = true*/
+
             return cell!
         }else if collectionView == self.collectionViewDesign {
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "celldesign", for: indexPath) as? HomeDesignCollectionViewCell
             cell?.Skill.text = dataFixDesign[indexPath.row].nama
           
-            
-           /* DispatchQueue.global(qos: .default).async { [self] in
-            
-      
-                if let imageCache = dataFixDesign[indexPath.row].imagecache{
-                    DispatchQueue.main.async {
-                        cell!.foto.image = imageCache
-                    }
- 
-                }else {
-                    let downloader = ImageDownloader(
-                        configuration: ImageDownloader.defaultURLSessionConfiguration(),
-                        downloadPrioritization: .fifo,
-                        maximumActiveDownloads: 20,
-                        imageCache: AutoPurgingImageCache()
-                    )
-                    let urlRequest = URLRequest(url: URL(string: dataFixDesign[indexPath.row].photo)!)
-
-                    downloader.download(urlRequest, completion:  { [self] response in
-                        print(response.request)
-                        print(response.response)
-                        debugPrint(response.result)
-                        
-                        if case .success(let image) = response.result {
-                            dataFixDesign[indexPath.row].imagecache = image
-                            DispatchQueue.main.async {
-                                cell!.foto.image = image
-                            }
-                
-                        }
-                    })
-                }
-                
-            }*/
+        
             if let imageUrl =  URL(string: dataFixDesign[indexPath.row].photo){
                                     cell?.foto.af.setImage(withURL: imageUrl, placeholderImage: UIImage(named: "defaultImage"))
                                 }
@@ -298,12 +212,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
             cell?.clipsToBounds = false
             cell?.layer.masksToBounds = false
             cell?.layer.cornerRadius = 6
-            
-            /*    cell?.foto.layer.borderWidth = 1
-            cell?.foto.layer.masksToBounds = false
-            //cell?.foto.layer.borderColor = UIColor.black.cgColor
-            cell?.foto.layer.cornerRadius = (cell?.foto.frame.height)!/2
-            cell?.foto.clipsToBounds = true */
+           
             return cell!
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellprofesional", for: indexPath) as? HomeProfesionalCollectionViewCell

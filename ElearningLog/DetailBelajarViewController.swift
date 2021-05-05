@@ -20,6 +20,13 @@ class DetailBelajarViewController: UIViewController {
     @IBOutlet var image: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        buttonPindah.layer.shadowColor = UIColor.gray.cgColor
+        buttonPindah.layer.shadowRadius = 4
+        buttonPindah.layer.shadowOpacity = 0.25
+        buttonPindah.layer.shadowOffset = CGSize(width: 0, height: 3.0)
+        buttonPindah.clipsToBounds = false
+        buttonPindah.layer.masksToBounds = false
+        buttonPindah.layer.cornerRadius = 6
 
         image.image = fotopindah
         judul.text = judupindah
