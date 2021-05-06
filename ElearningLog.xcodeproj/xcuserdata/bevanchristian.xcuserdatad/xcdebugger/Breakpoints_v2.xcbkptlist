@@ -7,69 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "EAA42ABB-3B3D-4B8F-B07B-7BEB1B129056"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ElearningLog/ElearningData.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "340"
-            endingLineNumber = "340"
-            landmarkName = "GetData(myview:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "EAA42ABB-3B3D-4B8F-B07B-7BEB1B129056 - 383a638334180858"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ElearningLog.elearnData.GetData(myview: ElearningLog.ViewController) -&gt; ()"
-                  moduleName = "ElearningLog"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bevanchristian/Desktop/ElearningLog/NanoChallange1/ElearningLog/ElearningData.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "99"
-                  endingLineNumber = "99"
-                  offsetFromSymbolStart = "749">
-               </Location>
-               <Location
-                  uuid = "EAA42ABB-3B3D-4B8F-B07B-7BEB1B129056 - 383a638334180858"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ElearningLog.elearnData.GetData(myview: ElearningLog.ViewController) -&gt; ()"
-                  moduleName = "ElearningLog"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bevanchristian/Desktop/ElearningLog/NanoChallange1/ElearningLog/ElearningData.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "99"
-                  endingLineNumber = "99"
-                  offsetFromSymbolStart = "780">
-               </Location>
-               <Location
-                  uuid = "EAA42ABB-3B3D-4B8F-B07B-7BEB1B129056 - 2ae23b46c2276c18"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.CKRecord) -&gt; () in ElearningLog.elearnData.GetData(myview: ElearningLog.ViewController) -&gt; ()"
-                  moduleName = "ElearningLog"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bevanchristian/Desktop/ElearningLog/NanoChallange1/ElearningLog/ElearningData.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "100"
-                  endingLineNumber = "100"
-                  offsetFromSymbolStart = "107">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "4EFB6346-8ECE-447E-BB1E-9E092E3C831C"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -77,8 +14,8 @@
             filePath = "ElearningLog/ElearningData.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "328"
-            endingLineNumber = "328"
+            startingLineNumber = "302"
+            endingLineNumber = "302"
             landmarkName = "GetData(myview:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -93,8 +30,8 @@
             filePath = "ElearningLog/ElearningData.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "329"
-            endingLineNumber = "329"
+            startingLineNumber = "303"
+            endingLineNumber = "303"
             landmarkName = "GetData(myview:)"
             landmarkType = "7">
          </BreakpointContent>

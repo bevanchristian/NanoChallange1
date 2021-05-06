@@ -330,7 +330,7 @@ class DetailViewController: UIViewController, UITextViewDelegate,UICollectionVie
         if counterSkill % 2 != 0{
             skill.isEditable = true
             skill.layer.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-            maubelajarapa.becomeFirstResponder()
+            skill.becomeFirstResponder()
             editSkill.setTitle("Done", for: .normal)
       
         }else{

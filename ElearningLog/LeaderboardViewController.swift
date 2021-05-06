@@ -84,7 +84,6 @@ class LeaderboardViewController: UIViewController,UICollectionViewDelegate,UICol
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "leaderboardcell", for: indexPath) as! LeaderboardCollectionViewCell
-        
         if kategori == 0{
  
             let filter = AspectScaledToFillSizeWithRoundedCornersFilter(
@@ -93,116 +92,32 @@ class LeaderboardViewController: UIViewController,UICollectionViewDelegate,UICol
             )
             if let imageUrl =  URL(string: dataFix[indexPath.row].photo){
                 cell.foto.af.setImage(withURL: imageUrl, placeholderImage: UIImage(named: "image_large"),filter: filter)}
-//            cell.layer.shadowColor = UIColor.gray.cgColor
-//            cell.layer.shadowRadius = 4
-//            cell.layer.shadowOpacity = 0.25
-//            cell.layer.shadowOffset = CGSize(width: 0, height: 3.0)
-//            cell.clipsToBounds = false
-//            cell.layer.masksToBounds = false
-//            cell.layer.cornerRadius = 6
+
             cell.nama.text = dataFix[indexPath.row].nama
             cell.point.text = dataFix[indexPath.row].point
             cell.urutan.text = String(indexPath.row + 1)
             return cell
         }else if kategori == 1{
-           /* DispatchQueue.global(qos: .default).async { [self] in
-            
-      
-                if let imageCache = dataFixDesign[indexPath.row].imagecache{
-                    DispatchQueue.main.async {
-                        cell.foto.image = imageCache
-                    }
- 
-                }else {
-                    let downloader = ImageDownloader(
-                        configuration: ImageDownloader.defaultURLSessionConfiguration(),
-                        downloadPrioritization: .fifo,
-                        maximumActiveDownloads: 20,
-                        imageCache: AutoPurgingImageCache()
-                    )
-                    let urlRequest = URLRequest(url: URL(string: dataFixDesign[indexPath.row].photo)!)
-
-                    downloader.download(urlRequest, completion:  { [self] response in
-                        print(response.request)
-                        print(response.response)
-                        debugPrint(response.result)
-                        
-                        if case .success(let image) = response.result {
-                            dataFixDesign[indexPath.row].imagecache = image
-                            DispatchQueue.main.async {
-                                cell.foto.image = image
-                            }
-                
-                        }
-                    })
-                }
-                
-            }*/
+       
             let filter = AspectScaledToFillSizeWithRoundedCornersFilter(
                 size: cell.foto.frame.size,
                 radius: 18
             )
             if let imageUrl =  URL(string: dataFixDesign[indexPath.row].photo){
                 cell.foto.af.setImage(withURL: imageUrl, placeholderImage: UIImage(named: "image_large"),filter: filter)}
-            cell.layer.shadowColor = UIColor.gray.cgColor
-            cell.layer.shadowRadius = 4
-            cell.layer.shadowOpacity = 0.25
-            cell.layer.shadowOffset = CGSize(width: 0, height: 3.0)
-            cell.clipsToBounds = false
-            cell.layer.masksToBounds = false
-            cell.layer.cornerRadius = 6
+   
             cell.nama.text = dataFixDesign[indexPath.row].nama
             cell.point.text = dataFixDesign[indexPath.row].point
             cell.urutan.text = String(indexPath.row + 1)
             return cell
         }else{
-        /*    DispatchQueue.global(qos: .default).async { [self] in
-            
       
-                if let imageCache = dataFixPro[indexPath.row].imagecache{
-                    DispatchQueue.main.async {
-                        cell.foto.image = imageCache
-                    }
- 
-                }else {
-                    let downloader = ImageDownloader(
-                        configuration: ImageDownloader.defaultURLSessionConfiguration(),
-                        downloadPrioritization: .fifo,
-                        maximumActiveDownloads: 20,
-                        imageCache: AutoPurgingImageCache()
-                    )
-                    let urlRequest = URLRequest(url: URL(string: dataFixPro[indexPath.row].photo)!)
-
-                    downloader.download(urlRequest, completion:  { [self] response in
-                        print(response.request)
-                        print(response.response)
-                        debugPrint(response.result)
-                        
-                        if case .success(let image) = response.result {
-                            dataFixPro[indexPath.row].imagecache = image
-                            DispatchQueue.main.async {
-                                cell.foto.image = image
-                            }
-                
-                        }
-                    })
-                }
-                
-            }*/
             let filter = AspectScaledToFillSizeWithRoundedCornersFilter(
                 size: cell.foto.frame.size,
                 radius: 18
             )
             if let imageUrl =  URL(string: dataFixPro[indexPath.row].photo){
                 cell.foto.af.setImage(withURL: imageUrl, placeholderImage: UIImage(named: "image_large"),filter: filter)}
-          
-            cell.layer.shadowColor = UIColor.gray.cgColor
-            cell.layer.shadowRadius = 4
-            cell.layer.shadowOpacity = 0.25
-            cell.layer.shadowOffset = CGSize(width: 0, height: 3.0)
-            cell.clipsToBounds = false
-            cell.layer.masksToBounds = false
-            cell.layer.cornerRadius = 6
             cell.nama.text = dataFixPro[indexPath.row].nama
             cell.point.text = dataFixPro[indexPath.row].point
             cell.urutan.text = String(indexPath.row + 1)

@@ -116,15 +116,7 @@ class elearnData{
             print(record.recordID)
             print(record["nama"]!)
             print(record["expertise"]!)
-           /* recordIdit.append(record.recordID)
-            nameArray.append((record["nama"] as? String)!)
-            photoArray.append((record["foto"] as? String)!)
-            mau_belajarArray.append((record["mau_belajar"] as? String)!)
-            pointArray.append((record["point"] as? String)!)
-            skillArray.append((record["skill"] as? String)!)
-            expertiseArray.append((record["expertise"] as? String)!)
-            shiftArray.append((record["shift"] as? String)!)
-            teamArray.append((record["team"] as? String)!)*/
+  
             
             var model = elearnModel()
 
@@ -142,16 +134,7 @@ class elearnData{
         
             print("foto \(model.photo)")
             dataFix.append(model)
-            //print(photoArray[x])
-         /*   if (record["foto"] as? String)! != nil{
-                if let datafoto = try? Data(contentsOf: (URL(string: (record["foto"] as? String)!) ?? URL(string: "https://dl.airtable.com/.attachments/793d85215a4c8118e5c815854d5b3725/0ceb3359/FelindaGracia.jpg"))! ) {
-                    if let foto = UIImage(data: datafoto) {
-                        model.photo = foto
-                    }
-                }
-            }*/
-            //let recordID = CKRecord.ID(recordName: model.nama)
-           
+       
             
         }
         
@@ -197,13 +180,7 @@ class elearnData{
         }
         operationdesign.qualityOfService = .userInteractive
         operationdesign.recordFetchedBlock = { [self] (record) in
-            print("query anyar")
-            
-            print(record.recordID)
-            print(record["nama"]!)
-            print(record["expertise"]!)
             recordIdDesign.append(record.recordID)
-            
             var model = elearnModel()
             model.id = record.recordID
             model.nama = (record["nama"] as? String)!
@@ -226,11 +203,11 @@ class elearnData{
                 if recordIdDesign.count != nil {
            
                     print("ada")}else{
-                // jika cloud ga ada manggil api dan dia nanti nyimpen kedalam cloud
+            
                         
+                    print("kosong")
                         
-                        
-                let urlString = "https://nc2.theideacompass.com/explorers-api.json"
+               /* let urlString = "https://nc2.theideacompass.com/explorers-api.json"
                 if let url = try? URL(string: urlString){
                     URLSession.shared.dataTask(with: url) { [self] data, response, error in
                       if let data = data {
@@ -239,13 +216,10 @@ class elearnData{
                       }
                    }.resume()
                     
-                }
+                }*/
                         
                         
-                        
-                        
-                        
-                
+
             }
                 
                          
@@ -301,7 +275,7 @@ class elearnData{
                     
                     print("ada")}else{
                 // jika cloud ga ada manggil api dan dia nanti nyimpen kedalam cloud
-                let urlString = "https://nc2.theideacompass.com/explorers-api.json"
+            /*    let urlString = "https://nc2.theideacompass.com/explorers-api.json"
                 if let url = try? URL(string: urlString){
                     URLSession.shared.dataTask(with: url) { [self] data, response, error in
                       if let data = data {
@@ -310,7 +284,7 @@ class elearnData{
                       }
                    }.resume()
                     
-                }
+                }*/
                 
             }
                 
@@ -324,315 +298,17 @@ class elearnData{
     
     func GetData(myview:ViewController){
         
-        
+        // manggil data dari cloud kit
         it(leaderboard: false)
         design(leaderboard: false)
         pro(leaderboard: false)
         
         
-        removeArray()
-        // it
-       /* let predicate = NSPredicate(format: "expertise == %@", "Tech / IT / IS")
-        let query = CKQuery(recordType: "User", predicate: predicate)
-        
-        // ini dapetin record idnya
-        let operation = CKQueryOperation(query: query)
-        operation.recordFetchedBlock = { [self] (record) in
-            print("query anyar")
-            print("it")
-            print(record.recordID)
-            print(record["nama"]!)
-            print(record["expertise"]!)
-            recordIdit.append(record.recordID)
-        }
-        
-        operation.queryCompletionBlock = { [self] cursor ,error in
-            
-                  
-                print("RecordIDs it: \(recordIdit)")
-            
-            
-            
-                         
-                   
-            
-        }
-        
-        database.add(operation)*/
-        
-     /*  database.perform(query, inZoneWith: nil) { [self] (records, error) in
-            // jika record nya nill maka manggil dari api
-            if records != nil {
-        print("asi")
-            // diterima dari cloudkit masih dalam bentuk array
-              
-                nameArray = records!.compactMap({$0.value(forKey:"nama") as? String})
-                photoArray = records!.compactMap({ $0.value(forKey: "foto") as? String})
-                mau_belajarArray = records!.compactMap({$0.value(forKey:"mau_belajar") as? String})
-                pointArray = records!.compactMap({ $0.value(forKey: "point") as? String})
-                skillArray = records!.compactMap({ $0.value(forKey: "skill") as? String})
-                expertiseArray = records!.compactMap({$0.value(forKey:"expertise") as? String})
-                shiftArray = records!.compactMap({ $0.value(forKey: "shift") as? String})
-                teamArray = records!.compactMap({$0.value(forKey:"team") as? String})
-                
-                
-                if nameArray.count > 0{
-
-                for x in 0...nameArray.count-1{
-                    var model = elearnModel()
-                    model.nama = nameArray[x]
-                    print(photoArray[x])
-                    if photoArray[x] != nil{
-                        if let datafoto = try? Data(contentsOf: (URL(string: photoArray[x]) ?? URL(string: "https://dl.airtable.com/.attachments/793d85215a4c8118e5c815854d5b3725/0ceb3359/FelindaGracia.jpg"))! ) {
-                            if let foto = UIImage(data: datafoto) {
-                                model.photo = foto
-                            }
-                        }
-                    }
-                    //let recordID = CKRecord.ID(recordName: model.nama)
-                    model.id = recordIdit[x]
-                    model.expertise = expertiseArray[x]
-                    model.team = teamArray[x]
-                    model.shift = shiftArray[x]
-                    model.belajar = mau_belajarArray[x]
-                    model.point = pointArray[x]
-                    model.skill = skillArray[x]
-                    dataFix.append(model)
-                    //NotificationCenter.default.post(name: NSNotification.Name(rawValue: "API"), object: self)
-                }
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "API"), object: self)
-                }else{
-                    print("kosong")
-                }
-               
-               
-            
-        }else{
-            // jika cloud ga ada manggil api dan dia nanti nyimpen kedalam cloud
-            let urlString = "https://nc2.theideacompass.com/explorers-api.json"
-            if let url = try? URL(string: urlString){
-                URLSession.shared.dataTask(with: url) { [self] data, response, error in
-                  if let data = data {
-                    parse(data)
-                    // function closure
-                  }
-               }.resume()
-                
-            }
-            
-        }
-        
-        
-    } */// database peform
-        
-        
-    // design ===================================================== area design dibawah ini ========= untuk home
-        
-        
-        
-        
-      /*  let predicateDesign = NSPredicate(format: "expertise == %@", "Design")
-        let queryDesign = CKQuery(recordType: "User", predicate: predicateDesign)
-        
-        
-        // ini dapetin record idnya
-        let operationdesign = CKQueryOperation(query: queryDesign)
-        operation.recordFetchedBlock = { [self] (record) in
-            print("query anyar")
-            
-            print(record.recordID)
-            print(record["nama"]!)
-            print(record["expertise"]!)
-            recordIdDesign.append(record.recordID)
-        }
-        
-        operationdesign.queryCompletionBlock = { cursor ,error in
-            
-            DispatchQueue.main.async { [self] in
-                         
-                  
-                         print("RecordIDs design: \(recordIdDesign)")
-                         
-                     }
-            
-        }
-        
-        database.add(operationdesign)*/
-       /* database.perform(queryDesign, inZoneWith: nil) { [self] (records, error) in
-            // jika record nya nill maka manggil dari api
-            if records != nil {
-        print("asi")
-            // diterima dari cloudkit masih dalam bentuk array
-       
-         
-               
-              
-                
-               
-                nameArrayDesign = records!.compactMap({$0.value(forKey:"nama") as? String})
-                photoArrayDesign = records!.compactMap({ $0.value(forKey: "foto") as? String})
-                mau_belajarArrayDesign = records!.compactMap({$0.value(forKey:"mau_belajar") as? String})
-                pointArrayDesign = records!.compactMap({ $0.value(forKey: "point") as? String})
-                skillArrayDesign = records!.compactMap({ $0.value(forKey: "skill") as? String})
-                expertiseArrayDesign = records!.compactMap({$0.value(forKey:"expertise") as? String})
-                shiftArrayDesign = records!.compactMap({ $0.value(forKey: "shift") as? String})
-                teamArrayDesign = records!.compactMap({$0.value(forKey:"team") as? String})
-                
-                
-                if nameArrayDesign.count > 0{
-
-                for x in 0...nameArrayDesign.count-1{
-                    var model = elearnModel()
-                    model.nama = nameArrayDesign[x]
-       
-                    print("design")
-                    if photoArrayDesign[x] != nil{
-                        if let datafoto = try? Data(contentsOf: (URL(string: photoArrayDesign[x]) ?? URL(string: "https://dl.airtable.com/.attachments/793d85215a4c8118e5c815854d5b3725/0ceb3359/FelindaGracia.jpg"))! ) {
-                            if let foto = UIImage(data: datafoto) {
-                                model.photo = foto
-                            }
-                        }
-                    }
-            
-                    model.id = recordIdDesign[x]
-                    model.expertise = expertiseArrayDesign[x]
-                    model.team = teamArrayDesign[x]
-                    model.shift = shiftArrayDesign[x]
-                    model.belajar = mau_belajarArrayDesign[x]
-                    model.point = pointArrayDesign[x]
-                    model.skill = skillArrayDesign[x]
-                    dataFixDesign.append(model)
-                    //NotificationCenter.default.post(name: NSNotification.Name(rawValue: "API"), object: self)
-                }
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "API"), object: self)
-                }else{
-                    print("kosong")
-                }
-            
-               
-            
-        }else{
-            // jika cloud ga ada manggil api dan dia nanti nyimpen kedalam cloud
-            let urlString = "https://nc2.theideacompass.com/explorers-api.json"
-            if let url = try? URL(string: urlString){
-                URLSession.shared.dataTask(with: url) { [self] data, response, error in
-                  if let data = data {
-                    parse(data)
-                    // function closure
-                  }
-               }.resume()
-                
-            }
-            
-        }
-        
-        
-    }*/
-        
-        // profesional ===================================================== area prodesional dibawah ini ========= untuk home
-    
-        
-      /*  let predicatePro = NSPredicate(format: "expertise == %@", "Domain Expert (Keahlian Khusus)")
-        let queryPro = CKQuery(recordType: "User", predicate: predicatePro)
-        
-        // ini dapetin record idnya
-        let operationpro = CKQueryOperation(query: queryPro)
-        operationpro.recordFetchedBlock = { [self] (record) in
-            print("query anyar")
-            
-            print(record.recordID)
-            print(record["nama"]!)
-            print(record["expertise"]!)
-            recordIdPro.append(record.recordID)
-        }
-        
-        operationpro.queryCompletionBlock = { cursor ,error in
-            
-            DispatchQueue.main.async { [self] in
-                         
-                  
-                         print("RecordIDs pro: \(recordIdPro)")
-                         
-                     }
-            
-        }
-        
-        database.add(operationpro)*/
-      /*  database.perform(queryPro, inZoneWith: nil) { [self] (records, error) in
-            // jika record nya nill maka manggil dari api
-            if records != nil {
-        print("asi")
-            // diterima dari cloudkit masih dalam bentuk array
-       
-               
-                nameArrayPro = records!.compactMap({$0.value(forKey:"nama") as? String})
-                photoArrayPro = records!.compactMap({ $0.value(forKey: "foto") as? String})
-                mau_belajarArrayPro = records!.compactMap({$0.value(forKey:"mau_belajar") as? String})
-                pointArrayPro = records!.compactMap({ $0.value(forKey: "point") as? String})
-                skillArrayPro = records!.compactMap({ $0.value(forKey: "skill") as? String})
-                expertiseArrayPro = records!.compactMap({$0.value(forKey:"expertise") as? String})
-                shiftArrayPro = records!.compactMap({ $0.value(forKey: "shift") as? String})
-                teamArrayPro = records!.compactMap({$0.value(forKey:"team") as? String})
-                
-                
-                if nameArrayPro.count > 0{
-
-                for x in 0...nameArrayPro.count-1{
-                    var model = elearnModel()
-                    model.nama = nameArrayPro[x]
-       
-                    print("design")
-                    if photoArrayPro[x] != nil{
-                        if let datafoto = try? Data(contentsOf: (URL(string: photoArrayPro[x]) ?? URL(string: "https://dl.airtable.com/.attachments/793d85215a4c8118e5c815854d5b3725/0ceb3359/FelindaGracia.jpg"))! ) {
-                            if let foto = UIImage(data: datafoto) {
-                                model.photo = foto
-                            }
-                        }
-                    }
-                    //let recordID = CKRecord.ID(recordName: model.nama)
-                    model.id = recordIdPro[x]
-                    model.expertise = expertiseArrayPro[x]
-                    model.team = teamArrayPro[x]
-                    model.shift = shiftArrayPro[x]
-                    model.belajar = mau_belajarArrayPro[x]
-                    model.point = pointArrayPro[x]
-                    model.skill = skillArrayPro[x]
-                    dataFixPro.append(model)
-                    //NotificationCenter.default.post(name: NSNotification.Name(rawValue: "API"), object: self)
-                }
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "API"), object: self)
-                }else{
-                    print("kosong")
-                }
-             
-               
-            
-        }else{
-            // jika cloud ga ada manggil api dan dia nanti nyimpen kedalam cloud
-            let urlString = "https://nc2.theideacompass.com/explorers-api.json"
-            if let url = try? URL(string: urlString){
-                URLSession.shared.dataTask(with: url) { [self] data, response, error in
-                  if let data = data {
-                    parse(data)
-                    // function closure
-                  }
-               }.resume()
-                
-            }
-            
-        }
-        
-        
-    }*/
-
-    
-  }// ahkir dari get data
+        removeArray()}
     
    
+    // dapetin detail user belajar apa
     func getDetail(nama:String,kedua:Bool){
-        
-        
-      
         
         let predicateDetail = NSPredicate(format: "nama == %@", "\(nama)")
         let queryDetail = CKQuery(recordType: "Belajar", predicate: predicateDetail)
@@ -664,7 +340,7 @@ class elearnData{
         database.add(operationDetail)
     }
     
-    
+    // dapetin review user ketika di detail
     func getReview(nama:String){
         
         let predicateReview = NSPredicate(format: "nama == %@", "\(nama)")
@@ -699,7 +375,7 @@ class elearnData{
     
     
     
-    
+    // kalo kosong di cloudkit di parse ini
     func parse(_ json:Data){
         let decoder = JSONDecoder()
         if let jsonDecoder = try? decoder.decode([dataExplor].self, from: json){
