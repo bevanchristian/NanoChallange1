@@ -62,9 +62,24 @@ class DetailViewController: UIViewController, UITextViewDelegate,UICollectionVie
         ReviewCollectionView.delegate = self
         ReviewCollectionView.dataSource = self
         
-//        skill.textContainer.maximumNumberOfLines = 1
-//        skill.textContainer.lineBreakMode = .byWordWrapping
-       
+        
+        skill.layer.shadowColor = UIColor.gray.cgColor
+        skill.layer.shadowRadius = 1
+        skill.layer.shadowOpacity = 0.25
+        skill.layer.shadowOffset = CGSize(width: 0, height: 2.0)
+        skill.clipsToBounds = false
+        skill.layer.masksToBounds = false
+        skill.layer.cornerRadius = 7
+        
+        maubelajarapa.layer.shadowColor = UIColor.gray.cgColor
+        maubelajarapa.layer.shadowRadius = 1
+        maubelajarapa.layer.shadowOpacity = 0.25
+        maubelajarapa.layer.shadowOffset = CGSize(width: 0, height: 1.0)
+        maubelajarapa.clipsToBounds = false
+        maubelajarapa.layer.masksToBounds = false
+        maubelajarapa.layer.cornerRadius = 7
+        
+
         DispatchQueue.global(qos: .userInteractive
         ).async { [self] in
             manggilData(kedua: false)
@@ -292,20 +307,16 @@ class DetailViewController: UIViewController, UITextViewDelegate,UICollectionVie
         if counterBelajar % 2 != 0{
             maubelajarapa.isEditable = true
             maubelajarapa.layer.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-            maubelajarapa.layer.shadowColor = UIColor.gray.cgColor
-            maubelajarapa.layer.shadowRadius = 1
-            maubelajarapa.layer.shadowOpacity = 0.25
-            maubelajarapa.layer.shadowOffset = CGSize(width: 0, height: 1.0)
-            maubelajarapa.clipsToBounds = false
-            maubelajarapa.layer.masksToBounds = false
-            maubelajarapa.layer.cornerRadius = 7
+            maubelajarapa.becomeFirstResponder()
+      
+
             editBelajar.setTitle("Done", for: .normal)
             editBelajar.setImage(nil, for: .normal)
            
            
       
         }else{
-            maubelajarapa.layer.backgroundColor = nil
+           // maubelajarapa.layer.backgroundColor = nil
             maubelajarapa.isEditable = false
            // editBelajar.setImage(UIImage(systemName: "pencil"), for: .normal)
             editBelajar.setTitle("Edit", for: .normal)
@@ -319,18 +330,11 @@ class DetailViewController: UIViewController, UITextViewDelegate,UICollectionVie
         if counterSkill % 2 != 0{
             skill.isEditable = true
             skill.layer.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-            //editSkill.setImage(UIImage(systemName: ""), for: .normal)
-            skill.layer.shadowColor = UIColor.gray.cgColor
-            skill.layer.shadowRadius = 1
-            skill.layer.shadowOpacity = 0.25
-            skill.layer.shadowOffset = CGSize(width: 0, height: 2.0)
-            skill.clipsToBounds = false
-            skill.layer.masksToBounds = false
-            skill.layer.cornerRadius = 7
+            maubelajarapa.becomeFirstResponder()
             editSkill.setTitle("Done", for: .normal)
       
         }else{
-            skill.layer.backgroundColor = nil
+           // skill.layer.backgroundColor = nil
             skill.isEditable = false
            // editSkill.setImage(UIImage(systemName: "pencil"), for: .normal)
             editSkill.setTitle("Edit", for: .normal)

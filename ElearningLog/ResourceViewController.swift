@@ -39,7 +39,7 @@ class ResourceViewController: UIViewController,UITableViewDelegate,UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "resourceCell", for: indexPath) as! ResourceTableViewCell
         cell.title.text = resourceArray[indexPath.row].namaResource
-        cell.subs.text = resourceArray[indexPath.row].link
+       // cell.subs.text = resourceArray[indexPath.row].link
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

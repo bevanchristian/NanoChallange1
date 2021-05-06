@@ -227,6 +227,9 @@ class elearnData{
            
                     print("ada")}else{
                 // jika cloud ga ada manggil api dan dia nanti nyimpen kedalam cloud
+                        
+                        
+                        
                 let urlString = "https://nc2.theideacompass.com/explorers-api.json"
                 if let url = try? URL(string: urlString){
                     URLSession.shared.dataTask(with: url) { [self] data, response, error in
@@ -237,6 +240,11 @@ class elearnData{
                    }.resume()
                     
                 }
+                        
+                        
+                        
+                        
+                        
                 
             }
                 
