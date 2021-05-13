@@ -34,6 +34,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         super.viewDidLoad()
         title = "Learning Explorer"
       
+        print(cobanama)
         configureRefreshControl()
         navigationController?.navigationBar.prefersLargeTitles = true
         collectionView.delegate = self
@@ -56,13 +57,10 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
             self.collectionView.reloadData()
             self.collectionViewDesign.reloadData()
             self.collectionViewProfesional.reloadData()
-            
-  
-            
-            print("a")
         }
 
     }
+    
     @objc func refresh(_ sender: AnyObject) {
         self.collectionView.reloadData()
         self.collectionViewDesign.reloadData()
@@ -113,9 +111,6 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         cell.id = dataFix[indexPath.row].id
         cell.tipe = 1
     
-        
-     
-            
             
         }else if collectionView == self.collectionViewDesign{
             cell.fotoUser = dataFixDesign[indexPath.row].photo
@@ -217,44 +212,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellprofesional", for: indexPath) as? HomeProfesionalCollectionViewCell
             cell?.Skill.text = dataFixPro[indexPath.row].nama
-            //cell?.foto.image = dataFixPro[indexPath.row].photo
-            
-          /*  DispatchQueue.global(qos: .default).async { [self] in
-            
-      
-                if let imageCache = dataFixPro[indexPath.row].imagecache{
-                    DispatchQueue.main.async {
-                        cell!.foto.image = imageCache
-                    }
- 
-                }else {
-                    let downloader = ImageDownloader(
-                        configuration: ImageDownloader.defaultURLSessionConfiguration(),
-                        downloadPrioritization: .fifo,
-                        maximumActiveDownloads: 20,
-                        imageCache: AutoPurgingImageCache()
-                    )
-                    let urlRequest = URLRequest(url: URL(string: dataFixPro[indexPath.row].photo)!)
-
-                    downloader.download(urlRequest, completion:  { [self] response in
-                        print(response.request)
-                        print(response.response)
-                        debugPrint(response.result)
-                        
-                        if case .success(let image) = response.result {
-                            dataFixPro[indexPath.row].imagecache = image
-                            DispatchQueue.main.async {
-                                cell!.foto.image = image
-                            }
-                
-                        }
-                    })
-                }
-                
-            }*/
-            
-            
-            
+    
             if let imageUrl =  URL(string: dataFixPro[indexPath.row].photo){
                                     cell?.foto.af.setImage(withURL: imageUrl, placeholderImage: UIImage(named: "defaultImage"))
                                 }

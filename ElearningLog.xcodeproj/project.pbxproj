@@ -31,6 +31,7 @@
 		503A5A46263EBCB700064EC8 /* LeaderboardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503A5A45263EBCB700064EC8 /* LeaderboardCollectionViewCell.swift */; };
 		503A5A49263EDD7900064EC8 /* DetailBelajarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503A5A48263EDD7900064EC8 /* DetailBelajarViewController.swift */; };
 		503A5A4C263EE11200064EC8 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503A5A4B263EE11200064EC8 /* WebViewController.swift */; };
+		509B07252646DCD20059222E /* coba.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509B07242646DCD20059222E /* coba.swift */; };
 		50C6DC5E26421FCB0025631B /* ResourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C6DC5D26421FCB0025631B /* ResourceViewController.swift */; };
 		50C6DC612642206D0025631B /* ResourceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C6DC602642206D0025631B /* ResourceData.swift */; };
 		50C6DC64264220C90025631B /* ResourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C6DC63264220C90025631B /* ResourceModel.swift */; };
@@ -69,6 +70,7 @@
 		503A5A45263EBCB700064EC8 /* LeaderboardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardCollectionViewCell.swift; sourceTree = "<group>"; };
 		503A5A48263EDD7900064EC8 /* DetailBelajarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailBelajarViewController.swift; sourceTree = "<group>"; };
 		503A5A4B263EE11200064EC8 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		509B07242646DCD20059222E /* coba.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = coba.swift; sourceTree = "<group>"; };
 		50C6DC5D26421FCB0025631B /* ResourceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceViewController.swift; sourceTree = "<group>"; };
 		50C6DC602642206D0025631B /* ResourceData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceData.swift; sourceTree = "<group>"; };
 		50C6DC63264220C90025631B /* ResourceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceModel.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				50C6DC662642286A0025631B /* resourceDataModel.swift */,
 				50C6DC6926422B430025631B /* ResourceTableViewCell.swift */,
 				50C6DC6C26422DD80025631B /* WebResourceViewController.swift */,
+				509B07242646DCD20059222E /* coba.swift */,
 			);
 			path = ElearningLog;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				503A5A202638211900064EC8 /* HomeCollectionViewCell.swift in Sources */,
 				503A5A152637F2EF00064EC8 /* elearnModel.swift in Sources */,
 				503A59FE2637CFFD00064EC8 /* ViewController.swift in Sources */,
+				509B07252646DCD20059222E /* coba.swift in Sources */,
 				503A59FA2637CFFD00064EC8 /* AppDelegate.swift in Sources */,
 				503A5A40263EB4A100064EC8 /* ReviewViewController.swift in Sources */,
 				503A5A49263EDD7900064EC8 /* DetailBelajarViewController.swift in Sources */,

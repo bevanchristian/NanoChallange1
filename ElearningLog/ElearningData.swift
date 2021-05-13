@@ -152,7 +152,6 @@ class elearnData{
                 URLSession.shared.dataTask(with: url) { [self] data, response, error in
                   if let data = data {
                     parse(data)
-                    // function closure
                   }
                }.resume()
                 
@@ -304,7 +303,10 @@ class elearnData{
         pro(leaderboard: false)
         
         
-        removeArray()}
+        removeArray()
+        
+        
+    }
     
    
     // dapetin detail user belajar apa

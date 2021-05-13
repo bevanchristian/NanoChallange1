@@ -20,7 +20,7 @@ class WebViewController: UIViewController,WKNavigationDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        navigationController?.navigationBar.isTranslucent = false
         if verifyUrl(urlString: urlpindah){
             webView.load(URLRequest(url: URL(string: urlpindah!)! ))
             webView.allowsBackForwardNavigationGestures = true
